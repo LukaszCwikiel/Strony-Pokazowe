@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>SenseVR — Poczuj wirtualny świat wszystkimi zmysłami | VR, Haptyka, Zapachy</title>
+  <meta name="description" content="SenseVR — zaawansowane doświadczenia VR z haptyką, zapachem, dźwiękiem przestrzennym i pełną obsługą eventów, terapii i edukacji. Rezerwacje online i demo sprzętu." />
+  <meta name="keywords" content="VR, haptyka, zapachy, wirtualna rzeczywistość, terapia VR, edukacja VR, eventy VR, symulatory, SenseVR" />
+  <meta name="author" content="SenseVR" />
+  <link rel="canonical" href="https://sensevr.example.pl/" />
+
+  <!-- Social cards -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="SenseVR — Poczuj wirtualny świat wszystkimi zmysłami" />
+  <meta property="og:description" content="Doświadcz VR z dodatkowymi zmysłami: zapach, dotyk, dźwięk przestrzenny i śledzenie ruchu. Rezerwuj sesje i eventy." />
+  <meta property="og:image" content="https://sensevr.example.pl/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- PWA hints -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0b1020">
+  <link rel="icon" href="/favicon.ico" />
+
+  <!-- Preconnect / preload for performance -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@400;700&display=swap" as="style">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Structured data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "SenseVR",
+    "url": "https://sensevr.example.pl",
+    "logo": "https://sensevr.example.pl/logo.png",
+    "sameAs": ["https://www.facebook.com/sensevr","https://www.linkedin.com/company/sensevr"],
+    "contactPoint": [{"@type":"ContactPoint","telephone":"+48 123 456 789","contactType":"customer service","areaServed":"PL","availableLanguage":["Polish","English"]}]
+  }
+  </script>
+
+  <style>
+  /* ---------------------- Variables & Reset ---------------------- */
+  :root{
+    --bg:#05061a; --panel:#0b1030; --muted:#9fb2d9; --accent1:#7f00ff; --accent2:#00bfff; --glass:rgba(255,255,255,0.04);
+    --radius:14px; --container:1150px; --success:#39d98a; --danger:#ff6b6b;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:linear-gradient(180deg,var(--bg),#07102a);color:#e6f0ff;line-height:1.5;-webkit-font-smoothing:antialiased}
+  img{max-width:100%;display:block}
+  a{color:var(--accent2)}
+
+  /* ---------------------- Layout ---------------------- */
+  .wrap{max-width:var(--container);margin:0 auto;padding:24px}
+  header.site{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:18px 0}
+  .brand{display:flex;align-items:center;gap:12px}
+  .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent1),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:800;color:#071026}
+  .brand h1{font-family:Orbitron,monospace;font-size:1.05rem;margin:0;color:var(--accent1)}
+  nav.top{display:flex;gap:8px;align-items:center}
+  nav.top a{padding:8px 10px;border-radius:8px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#cfe7ff;text-decoration:none}
+  nav.top a:focus{outline:3px solid rgba(127,0,255,0.18);outline-offset:3px}
+  .cta{display:flex;gap:10px}
+  .btn{background:linear-gradient(90deg,var(--accent1),var(--accent2));border:none;padding:10px 14px;border-radius:999px;color:#071026;font-weight:800;cursor:pointer}
+  .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:#cfe7ff}
+
+  /* ---------------------- Hero (Video + overlay) ---------------------- */
+  .hero{position:relative;height:80vh;border-radius:16px;overflow:hidden;display:grid;grid-template-columns:1fr 420px;align-items:center;gap:30px;margin-bottom:28px}
+  .hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.35) saturate(.9);}
+  .hero .overlay{position:relative;padding:48px;background:linear-gradient(180deg,rgba(11,16,48,0.35),rgba(4,6,16,0.45));backdrop-filter:blur(6px);border-radius:14px;margin:20px}
+  .hero h2{margin:0;font-size:clamp(1.6rem,3.8vw,2.8rem);color:linear-gradient(var(--accent1),var(--accent2));text-shadow:0 6px 30px rgba(0,0,0,0.6)}
+  .hero p{color:var(--muted);margin-top:12px}
+  .hero .features{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+  .pill{background:var(--glass);padding:8px 12px;border-radius:999px;font-weight:700;color:#dfefff}
+
+  /* ---------------------- Sections grid ---------------------- */
+  main{display:grid;grid-template-columns:2fr 1fr;gap:22px}
+  section{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:18px;border-radius:12px}
+  .side{position:sticky;top:24px}
+  h3{margin:0 0 12px 0;color:var(--accent1)}
+  p.lead{color:var(--muted)}
+
+  /* ---------------------- Offer cards ---------------------- */
+  .offers{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+  .offer{background:linear-gradient(180deg,#07112a,#041026);padding:16px;border-radius:12px;box-shadow:0 10px 30px rgba(11,20,40,0.6);transition:transform .28s,box-shadow .28s}
+  .offer:hover{transform:translateY(-8px);box-shadow:0 20px 40px rgba(0,0,0,0.6)}
+  .offer h4{color:var(--accent2);margin:8px 0}
+
+  /* ---------------------- Interactive configurator ---------------------- */
+  .config{display:grid;gap:10px}
+  .range{display:flex;gap:10px;align-items:center}
+  .price{font-size:1.2rem;font-weight:800;color:var(--accent2);}
+
+  /* ---------------------- Gallery / Lightbox ---------------------- */
+  .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+  .thumb{position:relative;border-radius:10px;overflow:hidden;cursor:pointer}
+  .thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+  .thumb:focus img,.thumb:hover img{transform:scale(1.06)}
+  .lightbox{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,4,12,0.8);z-index:9999}
+  .lightbox.show{display:flex}
+  .lightbox img{max-width:90%;max-height:90%;border-radius:12px}
+  .close-x{position:absolute;top:18px;right:18px;background:rgba(0,0,0,0.35);border:none;color:#fff;padding:8px;border-radius:8px}
+
+  /* ---------------------- FAQ accessible ---------------------- */
+  .faq{display:grid;gap:10px}
+  .faq button{width:100%;background:transparent;border:1px solid rgba(255,255,255,0.04);padding:12px;border-radius:10px;color:var(--muted);text-align:left;font-weight:700}
+  .faq .panel{max-height:0;overflow:hidden;transition:max-height .28s;padding:0 12px}
+
+  /* ---------------------- Contact form ---------------------- */
+  form.contact{display:grid;gap:10px}
+  input,textarea,select{padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#eaf4ff}
+  .status{padding:8px;border-radius:8px}
+  .success{background:linear-gradient(90deg,#153f2f,#1e5f45);color:var(--success)}
+  .error{background:linear-gradient(90deg,#3a1515,#702020);color:var(--danger)}
+
+  /* ---------------------- Footer ---------------------- */
+  footer{grid-column:1/-1;padding:18px;text-align:center;color:#9fbfff}
+
+  /* ---------------------- Utilities & responsive ---------------------- */
+  @media (max-width:900px){
+    .hero{grid-template-columns:1fr}
+    main{grid-template-columns:1fr}
+    .side{position:relative;top:auto}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none;transition:none}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="site" role="banner">
+      <div class="brand">
+        <div class="logo" aria-hidden>SV</div>
+        <div>
+          <h1>SenseVR</h1>
+          <div style="font-size:.78rem;color:var(--muted)">VR • Haptyka • Zapachy • Dźwięk 3D</div>
+        </div>
+      </div>
+
+      <nav class="top" role="navigation" aria-label="Główne menu">
+        <a href="#offers">Oferta</a>
+        <a href="#how">Jak to działa</a>
+        <a href="#tech">Technologie</a>
+        <a href="#pricing">Cennik</a>
+        <a href="#contact">Kontakt</a>
+      </nav>
+
+      <div class="cta">
+        <button class="btn" id="bookBtn">Umów wizytę</button>
+        <a class="btn ghost" href="#gallery">Galeria</a>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" role="region" aria-label="Hero">
+      <video autoplay muted loop playsinline crossorigin="anonymous" poster="/assets/hero-poster.jpg">
+        <source src="https://cdn.videvo.net/videvo_files/video/free/2019-04/small_watermarked/190330_09_VR_Goggles_4k_001_preview.webm" type="video/webm">
+        <source src="https://cdn.videvo.net/videvo_files/video/free/2019-04/small_watermarked/190330_09_VR_Goggles_4k_001_preview.mp4" type="video/mp4">
+      </video>
+
+      <div class="overlay">
+        <h2>Poczuj wirtualny świat wszystkimi zmysłami</h2>
+        <p class="lead">SenseVR łączy najwyższej klasy gogle VR, systemy haptyczne, emisję zapachu i dźwięk przestrzenny, by stworzyć w pełni immersyjne doświadczenia edukacyjne, terapeutyczne i eventowe.</p>
+        <div class="features" role="list">
+          <span class="pill" role="listitem">Haptyka 4D</span>
+          <span class="pill" role="listitem">Zapachy adaptacyjne</span>
+          <span class="pill" role="listitem">Dźwięk 3D</span>
+          <span class="pill" role="listitem">WebXR / demo</span>
+        </div>
+        <div style="margin-top:18px">
+          <button class="btn" id="demoBtn">Zobacz demo WebXR</button>
+          <button class="btn ghost" id="tourBtn">Zobacz ofertę</button>
+        </div>
+      </div>
+
+      <aside class="side" aria-hidden>
+        <div style="background:linear-gradient(180deg,#031226,#081433);padding:18px;border-radius:12px;box-shadow:0 12px 30px rgba(2,6,18,0.6)">
+          <h4 style="color:var(--accent2)">Szybkie korzyści</h4>
+          <ul style="color:var(--muted);margin-top:8px">
+            <li>Gotowe pakiety dla szkół i firm</li>
+            <li>SLA i wsparcie techniczne</li>
+            <li>Możliwość integracji z systemami LMS</li>
+          </ul>
+        </div>
+      </aside>
+    </section>
+
+    <main>
+      <section id="offers">
+        <h3>Oferta</h3>
+        <div class="offers" role="list">
+          <article class="offer" role="listitem" aria-labelledby="off1">
+            <h4 id="off1">Edukacja VR</h4>
+            <p class="lead">Programy dla szkół i uczelni — interaktywne lekcje historii, biologii i fizyki z elementami gamifikacji.</p>
+          </article>
+
+          <article class="offer" role="listitem" aria-labelledby="off2">
+            <h4 id="off2">Terapia i rehabilitacja</h4>
+            <p class="lead">Terapia bólu, PTSD, rehabilitacja motoryczna z haptycznym sprzętem i biofeedbackiem.</p>
+          </article>
+
+          <article class="offer" role="listitem" aria-labelledby="off3">
+            <h4 id="off3">Eventy i integracje</h4>
+            <p class="lead">Eventy firmowe, VR escape roomy i immersive team building.</p>
+          </article>
+
+          <article class="offer" role="listitem" aria-labelledby="off4">
+            <h4 id="off4">Projekty na zamówienie</h4>
+            <p class="lead">Wirtualne wystawy, prototypowanie produktu i symulacje przemysłowe.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="how">
+        <h3>Jak to działa</h3>
+        <p class="lead">Nasze doświadczenia łączą: renderowanie wysokiej jakości (Unreal/Unity), dźwięk obiektowy, haptyczne interakcje i selektywną emisję zapachu synchronizowaną z wydarzeniami w silniku.</p>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px">
+          <div style="background:var(--panel);padding:12px;border-radius:10px">
+            <strong>Rendering</strong><p class="lead" style="margin:6px 0;color:var(--muted)">Unreal + HDR, 90+ FPS (lokalnie), adaptacyjne LOD</p>
+          </div>
+          <div style="background:var(--panel);padding:12px;border-radius:10px">
+            <strong>Haptyka</strong><p class="lead" style="margin:6px 0;color:var(--muted)">Rękawice HaptX / silniki kinetyczne, profile siły</p>
+          </div>
+          <div style="background:var(--panel);padding:12px;border-radius:10px">
+            <strong>Zapach</strong><p class="lead" style="margin:6px 0;color:var(--muted)">Moduły zapachowe z precyzyjną kontrolą czasu i intensywności</p>
+          </div>
+          <div style="background:var(--panel);padding:12px;border-radius:10px">
+            <strong>Śledzenie</strong><p class="lead" style="margin:6px 0;color:var(--muted)">Optical + IMU, niska latencja, kalibracja wieloużytkownikowa</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="gallery">
+        <h3>Galeria</h3>
+        <div class="gallery" role="list">
+          <div class="thumb" tabindex="0" data-full="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80"><img loading="lazy" src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=400&q=80" alt="Haptyczne rękawice"></div>
+          <div class="thumb" tabindex="0" data-full="https://images.unsplash.com/photo-1529336953123-8a2f3f3f0a5b?auto=format&fit=crop&w=1200&q=80"><img loading="lazy" src="https://images.unsplash.com/photo-1529336953123-8a2f3f3f0a5b?auto=format&fit=crop&w=400&q=80" alt="Gogle VR"></div>
+          <div class="thumb" tabindex="0" data-full="https://images.unsplash.com/photo-1556316898-56895b9c33f1?auto=format&fit=crop&w=1200&q=80"><img loading="lazy" src="https://images.unsplash.com/photo-1556316898-56895b9c33f1?auto=format&fit=crop&w=400&q=80" alt="Dźwięk przestrzenny"></div>
+          <div class="thumb" tabindex="0" data-full="https://images.unsplash.com/photo-1509395176047-4a66953fd231?auto=format&fit=crop&w=1200&q=80"><img loading="lazy" src="https://images.unsplash.com/photo-1509395176047-4a66953fd231?auto=format&fit=crop&w=400&q=80" alt="Event VR"></div>
+        </div>
+      </section>
+
+      <section id="pricing">
+        <h3>Cennik (wybrane pakiety)</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
+          <div style="background:var(--panel);padding:14px;border-radius:10px">
+            <strong>Pakiet Edukacja</strong>
+            <div class="price">od 120 zł / os.</div>
+            <p class="lead" style="color:var(--muted)">Lekcje VR z materiałami dydaktycznymi.</p>
+          </div>
+          <div style="background:var(--panel);padding:14px;border-radius:10px">
+            <strong>Pakiet Terapia</strong>
+            <div class="price">od 200 zł / sesja</div>
+            <p class="lead" style="color:var(--muted)">Indywidualne sesje terapeutyczne.</p>
+          </div>
+          <div style="background:var(--panel);padding:14px;border-radius:10px">
+            <strong>Event całodniowy</strong>
+            <div class="price">od 3500 zł</div>
+            <p class="lead" style="color:var(--muted)">Sprzęt, obsługa i logistyczne wsparcie.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq">
+        <h3>FAQ</h3>
+        <div class="faq">
+          <div>
+            <button aria-expanded="false">Czy VR jest bezpieczny dla dzieci?</button>
+            <div class="panel">Tak — mamy programy dostosowane wiekowo i pod opieką przeszkolonego personelu.</div>
+          </div>
+          <div>
+            <button aria-expanded="false">Czy oferujecie wsparcie medyczne?</button>
+            <div class="panel">W przypadku terapii współpracujemy z certyfikowanymi terapeutami i lekarzami.</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <h3>Kontakt i rezerwacja</h3>
+        <form id="contactForm" class="contact" aria-label="Formularz kontaktowy">
+          <label for="name">Imię i nazwisko</label>
+          <input id="name" name="name" type="text" required autocomplete="name" />
+
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required autocomplete="email" />
+
+          <label for="phone">Telefon</label>
+          <input id="phone" name="phone" type="tel" required placeholder="+48 123 456 789" />
+
+          <label for="service">Usługa</label>
+          <select id="service" name="service">
+            <option value="education">Edukacja</option>
+            <option value="therapy">Terapia</option>
+            <option value="event">Event</option>
+            <option value="custom">Projekt niestandardowy</option>
+          </select>
+
+          <label for="date">Preferowana data</label>
+          <input id="date" name="date" type="date" />
+
+          <label for="message">Wiadomość</label>
+          <textarea id="message" name="message" rows="4"></textarea>
+
+          <div style="display:flex;gap:8px;align-items:center">
+            <button class="btn" type="submit">Wyślij zapytanie</button>
+            <div id="formStatus" role="status" aria-live="polite"></div>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+        <div>© 2025 SenseVR — Wszystkie prawa zastrzeżone</div>
+        <div style="color:var(--muted)">ul. Wirtualna 10, Warszawa • <a href="tel:+48123456789">+48 123 456 789</a></div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox" role="dialog" aria-hidden="true">
+    <button class="close-x" aria-label="Zamknij">✕</button>
+    <img alt="" src="" />
+  </div>
+
+  <script>
+  /* ---------------------- Helpers & progressive enhancement ---------------------- */
+  (function(){
+    // Accessibility: focus outline for keyboard users
+    function handleFirstTab(e){ if(e.key==='Tab'){ document.body.classList.add('user-is-tabbing'); window.removeEventListener('keydown',handleFirstTab); }}
+    window.addEventListener('keydown',handleFirstTab);
+
+    // Lightbox logic
+    const lightbox = document.getElementById('lightbox'); const lbImg = lightbox.querySelector('img'); const closeX = lightbox.querySelector('.close-x');
+    document.querySelectorAll('.thumb').forEach(t => {
+      t.addEventListener('click', openThumb);
+      t.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' ') { e.preventDefault(); openThumb.call(this); } });
+    });
+    function openThumb(){ const full = this.dataset.full; lbImg.src = full; lightbox.classList.add('show'); lightbox.setAttribute('aria-hidden','false'); closeX.focus(); }
+    function closeThumb(){ lightbox.classList.remove('show'); lightbox.setAttribute('aria-hidden','true'); lbImg.src=''; }
+    closeX.addEventListener('click', closeThumb); lightbox.addEventListener('click', e=>{ if(e.target===lightbox) closeThumb(); }); document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeThumb(); });
+
+    // FAQ accordion
+    document.querySelectorAll('.faq button').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const panel = btn.nextElementSibling; const open = btn.getAttribute('aria-expanded')==='true';
+        btn.setAttribute('aria-expanded', String(!open));
+        if(!open){ panel.style.maxHeight = panel.scrollHeight + 'px'; } else { panel.style.maxHeight = null; }
+      });
+    });
+
+    // Contact form: client-side validation + AJAX submit (example using fetch to a demo endpoint)
+    const form = document.getElementById('contactForm'); const status = document.getElementById('formStatus');
+    form.addEventListener('submit', async function(e){
+      e.preventDefault();
+      status.textContent=''; status.className='';
+      const fd = new FormData(form);
+      // Basic client validation
+      if(!fd.get('name')||!fd.get('email')||!fd.get('phone')){ status.textContent='Uzupełnij wymagane pola.'; status.className='status error'; return; }
+
+      const submitBtn = form.querySelector('button[type=submit]'); submitBtn.disabled = true; submitBtn.textContent = 'Wysyłanie...';
+      try{
+        // Replace with real backend endpoint
+        const res = await fetch('https://formspree.io/f/yourFormID', { method:'POST', body: fd, headers:{'Accept':'application/json'} });
+        if(res.ok){ const json = await res.json().catch(()=>({})); status.textContent='Dziękujemy — otrzymaliśmy zapytanie.'; status.className='status success'; form.reset(); }
+        else { const txt = await res.text(); console.warn(txt); status.textContent='Błąd wysyłki. Spróbuj ponownie.'; status.className='status error'; }
+      } catch(err){ console.error(err); status.textContent='Błąd sieci — sprawdź połączenie.'; status.className='status error'; }
+      submitBtn.disabled = false; submitBtn.textContent = 'Wyślij zapytanie';
+    });
+
+    // Booking button scroll
+    document.getElementById('bookBtn').addEventListener('click', ()=>{ document.getElementById('contact').scrollIntoView({behavior:'smooth'}); });
+
+    // WebXR demo launcher (feature-detect)
+    document.getElementById('demoBtn').addEventListener('click', async ()=>{
+      if(navigator.xr && await navigator.xr.isSessionSupported('immersive-vr')){
+        alert('Twoja przeglądarka wspiera WebXR. Uruchamiamy demo... (to tylko przykład)');
+        // tutaj można wczytać rzeczywiste demo WebXR (Three.js / WebXR Polyfill)
+      } else {
+        alert('WebXR nie jest obsługiwane na tym urządzeniu. Pokażemy wersję 2D demo.');
+      }
+    });
+
+    // Lazy-loading improvement: IntersectionObserver for video autoplay on viewport
+    const heroVideo = document.querySelector('.hero video');
+    if('IntersectionObserver' in window && heroVideo){
+      const io = new IntersectionObserver(entries=>{
+        entries.forEach(e=>{ if(e.isIntersecting){ heroVideo.play().catch(()=>{}); } else { heroVideo.pause(); } });
+      },{threshold:0.25}); io.observe(document.querySelector('.hero'));
+    }
+
+    // Register service worker (PWA offline support) — developer should supply /sw.js
+    if('serviceWorker' in navigator){ navigator.serviceWorker.register('/sw.js').then(()=>console.log('SW registered')).catch(()=>console.log('SW failed')); }
+
+    // Performance: prefetch likely pages (e.g., /pricing) on hover
+    document.querySelectorAll('nav.top a').forEach(a=>{
+      a.addEventListener('mouseover', ()=>{ const href=a.getAttribute('href'); if(href && href.startsWith('/')){ const l=document.createElement('link'); l.rel='prefetch'; l.href=href; document.head.appendChild(l); }});
+    });
+
+  })();
+  </script>
+
+</body>
+</html>

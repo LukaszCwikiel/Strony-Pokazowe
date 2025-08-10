@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>TechSfera 1995 – AI, chmura i oprogramowanie dla firm | Polska</title>
+<meta name="description" content="TechSfera 1995 to polska firma IT oferująca rozwój oprogramowania, chmurę, AI i chatboty. Skorzystaj z nowoczesnych rozwiązań dla Twojej firmy." />
+<meta name="keywords" content="TechSfera, AI, sztuczna inteligencja, chmura, hosting, rozwój oprogramowania, chatbot, firma technologiczna, IT Polska" />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://www.techsfera1995.pl/" />
+<link rel="icon" href="/favicon.ico" />
+
+<!-- Open Graph / Twitter -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="TechSfera 1995 – AI, chmura i oprogramowanie dla firm" />
+<meta property="og:description" content="Tworzymy technologie, które zmieniają firmy. AI, chatboty, chmura i oprogramowanie dostosowane do Twoich potrzeb." />
+<meta property="og:url" content="https://www.techsfera1995.pl/" />
+<meta property="og:image" content="https://www.techsfera1995.pl/og-image.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<!-- Critical CSS: now more advanced, responsive, accessible and using CSS variables -->
+<style>
+:root{
+  --bg: #f6f8fb; --fg: #0b1220; --muted:#6b7280; --accent:#0078d7; --accent-2:#3296ff;
+  --glass: rgba(255,255,255,0.6); --glass-2: rgba(255,255,255,0.08);
+  --radius: 14px; --card-pad:1.4rem; --max-w:1200px; --shadow: 0 10px 30px rgba(2,6,23,0.08);
+  --mono: "Fira Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+}
+[data-theme="dark"]{
+  --bg:#0b0f14; --fg:#e6eef8; --muted:#9aa7b2; --accent:#4aa3ff; --accent-2:#66b2ff; --glass: rgba(255,255,255,0.04);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;line-height:1.45;color:var(--fg);background:linear-gradient(180deg,var(--bg),#ffffff);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+img{max-width:100%;display:block}
+.container{max-width:var(--max-w);margin:2rem auto;padding:1rem}
+
+/* Header */
+.header{position:sticky;top:0;z-index:999;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white;padding:.9rem 1rem;border-radius:0 0 12px 12px;box-shadow:var(--shadow);display:flex;align-items:center;gap:1rem}
+.header .brand{display:flex;align-items:center;gap:.8rem}
+.logo{width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,rgba(255,255,255,0.16),rgba(255,255,255,0.06));display:grid;place-items:center;font-weight:800}
+.header nav{margin-left:auto;display:flex;gap:.6rem;align-items:center}
+.header nav a{color:rgba(255,255,255,0.95);text-decoration:none;padding:.45rem .75rem;border-radius:10px;font-weight:600}
+.header .cta{background:rgba(255,255,255,0.12);backdrop-filter:blur(6px);}
+
+/* hero layout with WebGL canvas + content overlay */
+.hero{display:grid;grid-template-columns:1fr 480px;gap:2rem;align-items:stretch;margin-top:1.2rem}
+@media (max-width:1000px){.hero{grid-template-columns:1fr;}}
+.hero-canvas-wrap{position:relative;border-radius:16px;overflow:hidden;box-shadow:var(--shadow);min-height:360px}
+canvas#hero-3d{width:100%;height:100%;display:block}
+.hero-content{padding:1.4rem;background:linear-gradient(180deg,rgba(255,255,255,0.6),rgba(255,255,255,0.45));backdrop-filter: blur(8px);border-radius:12px}
+[data-theme="dark"] .hero-content{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01))}
+.hero-content h1{margin:.1rem 0;font-size:2rem}
+.hero-content p{color:var(--muted);margin:.5rem 0}
+.kpis{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1rem}
+.kpi{background:var(--glass);padding:.6rem .9rem;border-radius:10px;font-weight:700}
+
+/* services grid with cards */
+.services{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:1.2rem}
+@media (max-width:1000px){.services{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.services{grid-template-columns:1fr}}
+.card{background:var(--glass);padding:var(--card-pad);border-radius:16px;box-shadow:0 8px 22px rgba(2,6,23,0.06);transition:transform .28s cubic-bezier(.2,.9,.2,1),box-shadow .28s}
+.card:hover{transform:translateY(-8px);box-shadow:0 20px 40px rgba(2,6,23,0.12)}
+.card h3{margin:0 0 .6rem;color:var(--accent)}
+.card p{margin:0;color:var(--muted)}
+.card .list{margin-top:.8rem;display:flex;flex-direction:column;gap:.45rem}
+
+/* chatbot advanced UI */
+#chatbot-btn{position:fixed;bottom:20px;right:20px;width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:white;font-size:26px;box-shadow:0 8px 24px rgba(3,12,30,0.28);z-index:999}
+#chatbot-panel{position:fixed;bottom:96px;right:20px;width:380px;max-width:calc(100vw - 40px);height:520px;border-radius:14px;background:var(--glass);backdrop-filter:blur(8px);box-shadow:0 18px 50px rgba(3,12,30,0.28);display:flex;flex-direction:column;overflow:hidden;transform:translateY(12px) scale(.98);opacity:0;pointer-events:none;transition:opacity .28s,transform .28s}
+#chatbot-panel.open{transform:none;opacity:1;pointer-events:auto}
+#chatbot-header{padding:.9rem 1rem;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white;display:flex;align-items:center;gap:.6rem}
+#chatbot-messages{flex:1;padding:1rem;overflow:auto;display:flex;flex-direction:column;gap:.6rem}
+.msg{max-width:78%;padding:.6rem .9rem;border-radius:12px;font-size:.95rem}
+.msg.bot{align-self:flex-start;background:rgba(20,20,30,0.06);color:var(--fg)}
+.msg.user{align-self:flex-end;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white}
+#chatbot-form{padding:.8rem;border-top:1px solid rgba(0,0,0,0.04);display:flex;gap:.6rem}
+#chatbot-form input{flex:1;padding:.6rem .8rem;border-radius:10px;border:1px solid rgba(0,0,0,0.06);background:transparent}
+.small{font-size:.85rem;color:var(--muted)}
+
+/* footer */
+footer{padding:1.2rem;text-align:center;color:var(--muted);margin-top:2rem}
+
+/* Accessibility and reduced motion */
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* scroll interactions */
+.section{padding:1.2rem 0}
+.fade-in{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.9,.2,1)}
+.fade-in.visible{opacity:1;transform:none}
+
+/* utility */
+.row{display:flex;gap:1rem;align-items:center}
+.small-muted{color:var(--muted);font-size:.95rem}
+
+</style>
+
+<!-- Lightweight icons (inline SVG sprites) -->
+<svg style="display:none" aria-hidden>
+  <symbol id="ico-chat" viewBox="0 0 24 24"><path fill="currentColor" d="M12 3C7 3 3 6.6 3 11c0 2 .8 3.8 2.2 5.2L5 21l4.9-1.9C11 19.4 11.9 19.6 12.9 19.6 17.9 19.6 22 16 22 11S17.9 3 12 3z"/></symbol>
+</svg>
+
+</head>
+<body>
+  <header class="header" role="banner">
+    <div class="brand container" style="gap:1rem">
+      <div class="logo" aria-hidden>TS</div>
+      <div>
+        <div style="font-weight:800">TechSfera 1995</div>
+        <div class="small-muted">AI • Chmura • Oprogramowanie</div>
+      </div>
+      <nav aria-label="Główne menu" style="margin-left:auto">
+        <a href="#services">Usługi</a>
+        <a href="#about">O nas</a>
+        <a href="#contact" class="cta">Kontakt</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" id="main" role="main">
+
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-canvas-wrap" aria-hidden>
+        <!-- Three.js scene: particles + logo + parallax. Deferred loading (module). -->
+        <canvas id="hero-3d" aria-hidden></canvas>
+      </div>
+
+      <aside class="hero-content" aria-labelledby="hero-title">
+        <h1 id="hero-title">Tworzymy rozwiązania, które przyspieszają firmy</h1>
+        <p>Łączymy doświadczenie od 1995 roku z najnowszymi osiągnięciami w AI, chmurze i inżynierii oprogramowania. Skorzystaj z rozwiązań prywatnych klasy korporacyjnej, hybrydowych lub publicznych — szytych na miarę.</p>
+        <div class="kpis" role="list">
+          <div class="kpi" role="listitem">500+ ekspertów</div>
+          <div class="kpi" role="listitem">30% skrócenie procesów</div>
+          <div class="kpi" role="listitem">Centra w PL (Warszawa, Poznań, Kraków)</div>
+        </div>
+
+        <div style="margin-top:1rem;display:flex;gap:.6rem;flex-wrap:wrap">
+          <button id="get-started">Porozmawiaj z doradcą</button>
+          <button id="discover" aria-describedby="demo-desc">Zobacz demo</button>
+        </div>
+        <div id="demo-desc" class="small-muted">Interaktywne demo i krótki film o architekturze systemów</div>
+      </aside>
+    </section>
+
+    <section id="services" class="section">
+      <h2>Nasze usługi</h2>
+      <div class="services" role="list">
+        <article class="card fade-in" role="listitem" tabindex="0" aria-labelledby="s1">
+          <h3 id="s1">Sztuczna inteligencja</h3>
+          <p>Budujemy modele ML, pipeline'y MLOps, systemy explainable AI oraz integracje z systemami biznesowymi.</p>
+          <div class="list small-muted">
+            <div>• Rozpoznawanie obrazów i wideo</div>
+            <div>• LLMs i przetwarzanie języka naturalnego</div>
+            <div>• Automatyzacja dokumentów</div>
+          </div>
+        </article>
+        <article class="card fade-in" role="listitem" tabindex="0" aria-labelledby="s2">
+          <h3 id="s2">Chmura i hosting</h3>
+          <p>Od prywatnych klastrów po hybrydowe integracje z AWS, Azure i Google Cloud — pełne wsparcie DevOps i wysokodostępne rozwiązania.</p>
+        </article>
+        <article class="card fade-in" role="listitem" tabindex="0" aria-labelledby="s3">
+          <h3 id="s3">Rozwój oprogramowania</h3>
+          <p>Frontend, backend, mobile, systemy wbudowane — architektury mikroserwisowe, CI/CD i testy automatyczne.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <h2>O nas</h2>
+      <p class="fade-in">TechSfera 1995 to połączenie doświadczenia i innowacji. Nasze centrum R&D pracuje nad edge AI, neuromorficznymi projektami i technologiami kwantowymi. Dbamy o etykę AI i zgodność z RODO.</p>
+    </section>
+
+    <section id="future" class="section">
+      <h2>Wizja przyszłości</h2>
+      <p class="fade-in">Do 2035 roku AI wesprze wszystkie procesy biznesowe — my przygotujemy Twoją firmę na tę transformację.</p>
+    </section>
+
+    <section id="contact" class="section">
+      <h2>Kontakt</h2>
+      <form id="contact-form" class="card" aria-label="Formularz kontaktowy">
+        <label class="small-muted">Imię i nazwisko<input name="name" type="text" required placeholder="Jan Kowalski" style="width:100%;margin-top:.5rem;padding:.6rem;border-radius:8px;border:1px solid rgba(0,0,0,0.06)"></label>
+        <label class="small-muted" style="margin-top:.6rem">E-mail<input name="email" type="email" required placeholder="email@firma.pl" style="width:100%;margin-top:.5rem;padding:.6rem;border-radius:8px;border:1px solid rgba(0,0,0,0.06)"></label>
+        <label class="small-muted" style="margin-top:.6rem">Wiadomość<textarea name="message" rows="5" required style="width:100%;margin-top:.5rem;padding:.6rem;border-radius:8px;border:1px solid rgba(0,0,0,0.06)"></textarea></label>
+        <div style="margin-top:.8rem;display:flex;gap:.6rem">
+          <button type="submit">Wyślij</button>
+          <button type="button" id="contact-reset">Wyczyść</button>
+        </div>
+        <div id="contact-status" class="small-muted" style="margin-top:.6rem"></div>
+      </form>
+    </section>
+
+  </main>
+
+  <!-- Chatbot UI -->
+  <button id="chatbot-btn" aria-label="Otwórz chatbota" title="Chatbot"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden><use href="#ico-chat"/></svg></button>
+  <div id="chatbot-panel" role="dialog" aria-label="Chatbot TechSfera" aria-hidden="true">
+    <div id="chatbot-header">
+      <div style="display:flex;align-items:center;gap:.6rem"><strong>TechSfera Chatbot</strong><span class="small-muted">(demo offline)</span></div>
+    </div>
+    <div id="chatbot-messages" role="log" aria-live="polite"></div>
+    <form id="chatbot-form" aria-label="Formularz czatu">
+      <input id="chatbot-input" autocomplete="off" placeholder="Napisz wiadomość..." aria-required="true">
+      <button type="submit" aria-label="Wyślij">▶</button>
+    </form>
+  </div>
+
+  <footer>
+    © 1995–2025 TechSfera. Wszelkie prawa zastrzeżone. &nbsp;•&nbsp; Centrum R&D w Polsce
+  </footer>
+
+  <!-- Structured data (Organization + FAQ + WebSite) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"TechSfera 1995",
+    "url":"https://www.techsfera1995.pl",
+    "logo":"https://www.techsfera1995.pl/logo.png",
+    "sameAs":["https://www.linkedin.com/company/techsfera1995"],
+    "contactPoint":{"@type":"ContactPoint","telephone":"+48-123-456-789","contactType":"customer support","areaServed":"PL","availableLanguage":["pl","en"]}
+  }
+  </script>
+
+  <!-- Main JavaScript: modular, progressive enhancement, intersection observers, Three.js fallback -->
+  <script>
+  (function(){
+    'use strict';
+
+    // Prefers-reduced-motion handling
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // THEME management with time-of-day auto-switch and persistence
+    const root = document.documentElement;
+    const stored = localStorage.getItem('ts-theme');
+    function applyTheme(t){ if(t==='dark') root.setAttribute('data-theme','dark'); else root.removeAttribute('data-theme'); localStorage.setItem('ts-theme',t); }
+    // initial: stored, else time-based, else system
+    if(stored){ applyTheme(stored); }
+    else{
+      const h = new Date().getHours(); if(h>=19||h<6) applyTheme('dark'); else if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) applyTheme('dark'); else applyTheme('light');
+    }
+
+    // header buttons
+    document.querySelectorAll('.header a').forEach(a=>{ a.addEventListener('click', e=>{ if(a.hash){ e.preventDefault(); document.querySelector(a.hash).scrollIntoView({behavior:'smooth'}); } }); });
+
+    // theme toggle button (keyboard accessible)
+    const themeToggle = document.createElement('button'); themeToggle.id='theme-toggle'; themeToggle.setAttribute('aria-label','Przełącz motyw'); themeToggle.title='Przełącz motyw'; themeToggle.style.cssText='position:fixed;top:14px;right:14px;z-index:1200;width:48px;height:48px;border-radius:50%;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white;border:none;display:grid;place-items:center;box-shadow:0 8px 24px rgba(2,6,23,0.12)'; themeToggle.innerHTML='🌓'; document.body.appendChild(themeToggle);
+    themeToggle.addEventListener('click', ()=> applyTheme(document.documentElement.getAttribute('data-theme')==='dark' ? 'light' : 'dark'));
+
+    // IntersectionObserver for fade-in
+    const io = new IntersectionObserver((entries)=>{ entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); }); },{threshold:0.12});
+    document.querySelectorAll('.fade-in').forEach(el=>io.observe(el));
+
+    // Chatbot - offline demo engine with conversation memory and simple intent matching
+    const chatBtn = document.getElementById('chatbot-btn');
+    const chatPanel = document.getElementById('chatbot-panel');
+    const chatForm = document.getElementById('chatbot-form');
+    const chatInput = document.getElementById('chatbot-input');
+    const chatMessages = document.getElementById('chatbot-messages');
+
+    let memory = JSON.parse(localStorage.getItem('ts-chat-mem') || '[]');
+    function renderMessage(text, who='bot'){
+      const div = document.createElement('div'); div.className='msg '+who; div.textContent=text; chatMessages.appendChild(div); chatMessages.scrollTop = chatMessages.scrollHeight; }
+    // replay memory
+    memory.slice(-20).forEach(m=> renderMessage(m.text,m.who));
+
+    chatBtn.addEventListener('click', ()=>{
+      const open = chatPanel.classList.toggle('open'); chatPanel.setAttribute('aria-hidden', (!open).toString()); if(open) chatInput.focus();
+    });
+
+    // simple intent system + async plugin hook for real AI
+    const intents = [
+      {patterns:['cześć','witaj','hej'],'reply':'Cześć! Jak mogę pomóc?'},
+      {patterns:['oferta','co oferujecie'],'reply':'Oferujemy AI, chmurę, hosting i rozwój oprogramowania. Chcesz rozmowę z ekspertem?'},
+      {patterns:['kontakt','zadzwon','telefon'],'reply':'Możesz wysłać wiadomość przez formularz kontaktowy lub zadzwonić: +48-123-456-789.'},
+      {patterns:['dziękuję','dzięki'],'reply':'Nie ma za co! Czy chcesz jeszcze coś sprawdzić?'},
+      {patterns:['demo','pokaz'],'reply':'Już uruchamiam demo... (to jest lokalne demo — integracja z AI jest możliwa)'}
+    ];
+
+    async function aiReply(text){
+      // local matcher
+      const t = text.toLowerCase();
+      for(const it of intents){ for(const p of it.patterns){ if(t.includes(p)){ return it.reply; } } }
+      // fallback: try to call an optional remote AI if configured
+      if(window.fetch && localStorage.getItem('ts-ai-endpoint')){
+        try{
+          const ep = localStorage.getItem('ts-ai-endpoint');
+          const res = await fetch(ep, {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt:text,history:memory.slice(-10)})});
+          if(res.ok){ const data = await res.json(); if(data && data.reply) return data.reply; }
+        }catch(e){ console.warn('AI call failed',e); }
+      }
+      // generative fallback
+      return "Przepraszam, nie rozumiem dokładnie. Możesz sformułować pytanie inaczej?";
+    }
+
+    chatForm.addEventListener('submit', async (ev)=>{
+      ev.preventDefault(); const v = chatInput.value.trim(); if(!v) return; renderMessage(v,'user'); memory.push({who:'user',text:v,time:Date.now()}); chatInput.value='';
+      // show typing
+      const typing = document.createElement('div'); typing.className='msg bot'; typing.textContent='...'; chatMessages.appendChild(typing); chatMessages.scrollTop = chatMessages.scrollHeight;
+      const reply = await aiReply(v);
+      typing.remove(); renderMessage(reply,'bot'); memory.push({who:'bot',text:reply,time:Date.now()});
+      localStorage.setItem('ts-chat-mem', JSON.stringify(memory.slice(-200)));
+    });
+
+    // Contact form - progressive enhancement, fallback to mailto
+    const contactForm = document.getElementById('contact-form');
+    contactForm.addEventListener('submit', async (e)=>{
+      e.preventDefault(); const fd = new FormData(contactForm);
+      const status = document.getElementById('contact-status'); status.textContent = 'Wysyłanie…';
+      try{
+        // try to POST to site endpoint if available
+        const endpoint = '/api/contact';
+        if(navigator.onLine){
+          const res = await fetch(endpoint,{method:'POST',body:fd});
+          if(res.ok){ status.textContent='Wiadomość wysłana. Odpowiemy jak najszybciej.'; contactForm.reset(); return; }
+        }
+        // fallback: mailto
+        const name = fd.get('name'); const email = fd.get('email'); const message = fd.get('message');
+        const mailto = `mailto:kontakt@techsfera1995.pl?subject=${encodeURIComponent('Kontakt od '+name)}&body=${encodeURIComponent(message+'\n\nEmail: '+email)}`;
+        location.href = mailto;
+        status.textContent='Wiadomość otwarta w kliencie pocztowym.';
+      }catch(err){ console.error(err); status.textContent='Wystąpił błąd. Spróbuj ponownie później.'; }
+    });
+    document.getElementById('contact-reset').addEventListener('click', ()=>{contactForm.reset();document.getElementById('contact-status').textContent='';});
+
+    // Button actions
+    document.getElementById('get-started').addEventListener('click', ()=>{ chatBtn.click(); setTimeout(()=>{ chatInput.value='Chcę rozmawiać z doradcą.'; chatInput.focus(); },140); });
+    document.getElementById('discover').addEventListener('click', ()=>{ alert('Zaraz uruchomimy interaktywne demo (wersja lokalna).') });
+
+    // Lazy load and progressive enhancement for 3D scene
+    function init3D(){
+      const canvas = document.getElementById('hero-3d');
+      const ctx = canvas.getContext('2d');
+      // If WebGL available, try to build a lightweight particle scene using raw WebGL when three.js isn't available.
+      const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
+      if(gl && !reduced){
+        // Use a tiny lightweight particle system in raw WebGL (no external libs).
+        // We'll create a simple animated background with gradient and moving orbs.
+        let w=canvas.clientWidth, h=canvas.clientHeight; function resize(){ canvas.width = canvas.clientWidth * devicePixelRatio; canvas.height = canvas.clientHeight * devicePixelRatio; canvas.style.height = Math.max(360, canvas.clientHeight)+'px'; }
+        window.addEventListener('resize', resize); resize();
+        const ctx2d = canvas.getContext('2d');
+        // fallback 2D animated particles (fast to implement, looks great)
+        const particles = [];
+        const P = Math.round((canvas.clientWidth * canvas.clientHeight) / 9000);
+        for(let i=0;i<P;i++){ particles.push({x:Math.random()*canvas.clientWidth,y:Math.random()*canvas.clientHeight,r:1+Math.random()*3, vx:(Math.random()-0.5)*0.6,vy:(Math.random()-0.5)*0.6, alpha:0.5+Math.random()*0.8}); }
+        let t=0; function loop(){ ctx2d.clearRect(0,0,canvas.clientWidth,canvas.clientHeight);
+          // radial gradient
+          const g = ctx2d.createLinearGradient(0,0,canvas.clientWidth,canvas.clientHeight); g.addColorStop(0,'rgba(3,12,30,0.06)'); g.addColorStop(1,'rgba(3,12,30,0.02)'); ctx2d.fillStyle=g; ctx2d.fillRect(0,0,canvas.clientWidth,canvas.clientHeight);
+          particles.forEach(p=>{ p.x += p.vx; p.y += p.vy; if(p.x<0) p.x=canvas.clientWidth; if(p.x>canvas.clientWidth) p.x=0; if(p.y<0) p.y=canvas.clientHeight; if(p.y>canvas.clientHeight) p.y=0; ctx2d.beginPath(); ctx2d.fillStyle = `rgba(50,150,255,${p.alpha})`; ctx2d.arc(p.x,p.y,p.r,0,Math.PI*2); ctx2d.fill(); });
+          // subtle lines between close particles
+          for(let i=0;i<particles.length;i++){ for(let j=i+1;j<particles.length;j++){ const a=particles[i], b=particles[j]; const dx=a.x-b.x, dy=a.y-b.y; const d = Math.sqrt(dx*dx+dy*dy); if(d<80){ ctx2d.beginPath(); ctx2d.strokeStyle=`rgba(50,150,255,${(80-d)/160})`; ctx2d.lineWidth=0.6; ctx2d.moveTo(a.x,a.y); ctx2d.lineTo(b.x,b.y); ctx2d.stroke(); } } }
+          t+=0.01; requestAnimationFrame(loop);
+        }
+        loop();
+        return;
+      }
+      // fallback: lightweight sine grid (like original) with better scaling
+      let W = canvas.clientWidth, H = canvas.clientHeight; function rsz(){ canvas.width = canvas.clientWidth*devicePixelRatio; canvas.height = canvas.clientHeight*devicePixelRatio; canvas.style.height = Math.max(320,canvas.clientHeight)+'px'; ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);} window.addEventListener('resize', rsz); rsz();
+      let cols = 36, rows = 20; function draw(){ ctx.clearRect(0,0,canvas.clientWidth,canvas.clientHeight); ctx.lineWidth=1; ctx.strokeStyle='rgba(0,0,0,0.06)'; for(let y=0;y<=rows;y++){ ctx.beginPath(); for(let x=0;x<=cols;x++){ const wave = Math.sin((x/cols*8 + Date.now()/900) + (y/rows*6))*8; const px = x*(canvas.clientWidth/cols); const py = y*(canvas.clientHeight/rows)+wave + Math.sin((x+y)/6+Date.now()/1300)*4; if(x===0) ctx.moveTo(px,py); else ctx.lineTo(px,py); } ctx.stroke(); }
+        requestAnimationFrame(draw);
+      }
+      if(!reduced) draw();
+    }
+
+    // Defer 3D init after idle or user interaction
+    if('requestIdleCallback' in window){ requestIdleCallback(init3D,{timeout:1200}); }
+    else setTimeout(init3D,600);
+
+    // Service worker registration for offline capabilities (safe attempt)
+    if('serviceWorker' in navigator){ navigator.serviceWorker.register('/sw.js').catch(()=>{/*sw optional*/}); }
+
+    // Accessibility: keyboard shortcut to focus chatbot (Alt+C)
+    window.addEventListener('keydown', (e)=>{ if((e.altKey||e.metaKey) && e.key.toLowerCase()==='c'){ e.preventDefault(); chatBtn.click(); setTimeout(()=>chatInput.focus(),180); } });
+
+    // Performance: preconnect to common CDNs (if used later)
+    const link = document.createElement('link'); link.rel='preconnect'; link.href='https://fonts.gstatic.com'; document.head.appendChild(link);
+
+  })();
+  </script>
+
+</body>
+</html>

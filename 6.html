@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+  <!-- Primary SEO -->
+  <title>NextGen Robotics – Robotyka Przemysłowa, Automatyzacja, AI, Przemysł 4.0</title>
+  <meta name="description" content="NextGen Robotics — kompleksowe rozwiązania robotyczne: coboty, linie produkcyjne, wizja maszynowa, AMR/AGV, wdrożenia Przemysł 4.0. Oferta dla przemysłu w Polsce i Europie.">
+  <meta name="keywords" content="robotyka, automatyka, coboty, roboty przemysłowe, integracja systemów, wizja maszynowa, AI, Przemysł 4.0, programowanie robotów, serwis robotów, AMR, AGV">
+  <meta name="author" content="NextGen Robotics">
+  <link rel="canonical" href="https://twojadomena.pl/">
+  <meta name="robots" content="index,follow">
+
+  <!-- Social sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="NextGen Robotics">
+  <meta property="og:title" content="NextGen Robotics – Robotyka Przemysłowa, Automatyzacja, AI, Przemysł 4.0">
+  <meta property="og:description" content="Lider w robotyce przemysłowej — wdrożenia cobotów, wizja maszynowa i integracje linii produkcyjnych dla firm z całej Polski.">
+  <meta property="og:image" content="https://twojadomena.pl/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Performance hints -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@400;700&display=swap" as="style">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- PWA & mobile -->
+  <meta name="theme-color" content="#0b1220">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/favicon.ico">
+
+  <!-- Structured Data (Organization, Service, Product, FAQ) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "name": "NextGen Robotics",
+        "url": "https://twojadomena.pl",
+        "logo": "https://twojadomena.pl/logo.png",
+        "sameAs": ["https://www.linkedin.com/company/nextgen","https://twitter.com/nextgen"]
+      },
+      {
+        "@type": "Service",
+        "serviceType": "Integracja systemów robotycznych",
+        "provider": {"@type":"Organization","name":"NextGen Robotics"},
+        "areaServed": "PL"
+      },
+      {
+        "@type": "Product",
+        "name": "NextGen X1",
+        "description": "Ramię robotyczne do precyzyjnych operacji montażowych i spawalniczych.",
+        "brand": "NextGen",
+        "offers": {"@type":"Offer","priceCurrency":"PLN","price":"320000","availability":"https://schema.org/InStock"}
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {"@type":"Question","name":"Jak mogę zamówić produkt?","acceptedAnswer":{"@type":"Answer","text":"Kontakt przez formularz lub sprzedaż — przygotujemy ofertę i harmonogram."}},
+          {"@type":"Question","name":"Jakie są warunki gwarancji?","acceptedAnswer":{"@type":"Answer","text":"Standardowo 24 miesiące z opcją rozszerzonego SLA."}}
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <style>
+  /* ================== Advanced, modular CSS ================== */
+  :root{--bg:#070812;--card:#0f1724;--muted:#98aefc;--accent:#66a6ff;--accent-2:#2e58ff;--glass:rgba(255,255,255,0.03);--radius:12px;--container:1200px}
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;color:#dfe8ff;background:linear-gradient(180deg,#06070a 0%,#0b0f16 100%);-webkit-font-smoothing:antialiased}
+  img{display:block;max-width:100%;height:auto}
+  a{color:var(--accent)}
+
+  .container{max-width:var(--container);margin:0 auto;padding:0 18px}
+  header{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
+  .brand{display:flex;gap:12px;align-items:center}
+  .logo{width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;font-weight:800;color:#04102b}
+  .site-title{font-family:Orbitron,monospace;color:var(--accent);font-weight:700;font-size:1.05rem}
+
+  /* Nav: accessible, keyboard friendly */
+  nav{display:flex;gap:10px;align-items:center}
+  .nav-link{color:#cfe1ff;padding:8px 10px;border-radius:8px;text-decoration:none;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+  .nav-link:focus{outline:3px solid rgba(102,166,255,0.18);outline-offset:2px}
+
+  /* Hero / grid */
+  .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;padding:28px 0}
+  .hero h1{font-size:clamp(1.6rem,3.4vw,2.6rem);color:#eaf3ff;margin:0}
+  .hero p{color:#bcd2ff;margin:12px 0}
+  .hero-ctas{display:flex;gap:12px}
+  .btn{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#04102b;padding:12px 16px;border-radius:999px;font-weight:800;border:none;cursor:pointer}
+  .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:#cfe1ff}
+
+  /* Responsive grid for content sections */
+  section{margin:36px 0}
+  h2{font-size:1.6rem;color:var(--accent);border-left:4px solid var(--accent);padding-left:12px;margin-bottom:12px}
+
+  /* Products: detailed specs, tabs, and configurator */
+  .products{display:grid;grid-template-columns:1fr 360px;gap:18px}
+  .specs{background:linear-gradient(180deg,#091026,#07101a);padding:18px;border-radius:12px;box-shadow:0 12px 40px rgba(20,40,90,0.18)}
+  .specs h3{color:#9fbfff}
+  .specs dl{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .specs dt{color:#9fbfff;font-weight:700}
+  .specs dd{color:#cfe1ff;margin:0}
+
+  .config{background:linear-gradient(180deg,#0b1630,#071026);padding:18px;border-radius:12px}
+  .config label{display:block;font-weight:700;color:#9fbfff;margin:8px 0 6px}
+  .config input[type=range]{width:100%}
+  .price-box{background:#071022;padding:12px;border-radius:10px;margin-top:12px;text-align:center;font-weight:800;color:var(--accent)}
+
+  /* Portfolio and media: use CSS grid and lazy images (loading=lazy) */
+  .grid{display:grid;gap:16px}
+  .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+  .card{background:linear-gradient(180deg,#071026,#06101a);padding:12px;border-radius:10px}
+
+  /* Blog: cards with read time and tags */
+  .blog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+  .post{background:linear-gradient(180deg,#071229,#041021);padding:14px;border-radius:12px}
+  .post h4{color:var(--accent);margin-bottom:6px}
+  .meta{color:#9fbfff;font-size:.9rem}
+
+  /* FAQ: accordion accessible */
+  .faq .item{background:#071026;border-radius:8px;padding:12px;margin-bottom:8px}
+  .faq button{width:100%;text-align:left;background:transparent;border:none;color:#9fbfff;font-weight:700;padding:10px;cursor:pointer}
+  .faq .answer{max-height:0;overflow:hidden;transition:max-height .32s ease;color:#cfe1ff;padding:0 10px}
+
+  /* Contact: enhanced form with progress state */
+  .contact-panel{display:grid;grid-template-columns:1fr 320px;gap:18px}
+  form{background:linear-gradient(180deg,#081229,#051022);padding:16px;border-radius:10px}
+  label{color:#9fbfff;font-weight:700}
+  input,textarea,select{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#dfe8ff;margin-bottom:10px}
+  .helper{font-size:.9rem;color:#9fbfff}
+
+  footer{padding:20px 0;color:#6f88b8;text-align:center}
+
+  /* accessible focus styles */
+  :focus{outline-offset:3px}
+
+  @media (max-width:980px){.hero{grid-template-columns:1fr}.products{grid-template-columns:1fr}.contact-panel{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden>NG</div>
+        <div>
+          <div class="site-title">NextGen Robotics</div>
+          <div style="font-size:.75rem;color:#9fbfff">Robotyka • Automatyzacja • AI</div>
+        </div>
+      </div>
+
+      <nav aria-label="Główne menu">
+        <a class="nav-link" href="#about">O nas</a>
+        <a class="nav-link" href="#products">Produkty</a>
+        <a class="nav-link" href="#portfolio">Portfolio</a>
+        <a class="nav-link" href="#rnd">R&amp;D</a>
+        <a class="nav-link" href="#blog">Blog</a>
+        <a class="nav-link" href="#contact">Kontakt</a>
+      </nav>
+
+      <div><a class="btn" href="#contact">Umów demo</a></div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <h1>Kompletne wdrożenia robotyczne i systemy Przemysł 4.0 dla Twojej fabryki</h1>
+          <p>Projektujemy, integrujemy i serwisujemy roboty przemysłowe, coboty, AMR/AGV oraz systemy wizji maszynowej. Od konsultacji po serwis 24/7.</p>
+          <div class="hero-ctas">
+            <button class="btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Zamów konsultację</button>
+            <a class="btn ghost" href="#products">Zobacz produkty</a>
+          </div>
+          <ul style="margin-top:14px;color:#9fbfff">
+            <li>Integracja: KUKA, ABB, FANUC, UR</li>
+            <li>AI & wizja maszynowa: kontrola jakości w czasie rzeczywistym</li>
+            <li>Serwis, szkolenia i umowy SLA</li>
+          </ul>
+        </div>
+        <div aria-hidden>
+          <picture>
+            <source media="(min-width:800px)" srcset="https://images.unsplash.com/photo-1581091012184-7c4a1f0d0b8b?auto=format&fit=crop&w=1200&q=80">
+            <img src="https://images.unsplash.com/photo-1581091012184-7c4a1f0d0b8b?auto=format&fit=crop&w=800&q=80" alt="Roboty przemysłowe" loading="lazy" width="420" height="300" style="border-radius:12px;box-shadow:0 10px 40px rgba(30,60,120,0.2)">
+          </picture>
+        </div>
+      </section>
+
+      <section id="products">
+        <h2>Nasze produkty i konfigurator</h2>
+        <div class="products">
+          <div class="specs">
+            <h3>NextGen X1 — ramię przemysłowe</h3>
+            <p class="helper">Pełna specyfikacja, certyfikaty i opcje rozszerzeń.</p>
+            <dl>
+              <dt>Zasięg</dt><dd>1,6 m</dd>
+              <dt>Udźwig</dt><dd>12 kg</dd>
+              <dt>Dokładność</dt><dd>±0.03 mm</dd>
+              <dt>Interfejs</dt><dd>EtherCAT / ROS2</dd>
+              <dt>Certyfikaty</dt><dd>CE, ISO 13849</dd>
+            </dl>
+
+            <h3 style="margin-top:12px">Opcje</h3>
+            <ul style="color:#cfe1ff">
+              <li>Manipulator z narzędziem spawalniczym</li>
+              <li>Moduł wizyjny 4K + AI</li>
+              <li>Integracja z PLC i MES</li>
+            </ul>
+
+            <h3 style="margin-top:12px">Konfigurator</h3>
+            <div class="config">
+              <label for="speedRange">Prędkość (%): <span id="speedValue">100</span></label>
+              <input id="speedRange" type="range" min="40" max="120" value="100">
+              <label for="payload">Dodatkowy ładunek (kg): <span id="payloadValue">0</span></label>
+              <input id="payload" type="range" min="0" max="20" value="0">
+              <div class="price-box" id="priceBox">Orientacyjna cena: 320 000 PLN</div>
+            </div>
+          </div>
+
+          <aside class="config card">
+            <h3>Porównanie modeli</h3>
+            <div style="display:grid;gap:8px">
+              <div style="display:flex;justify-content:space-between"><strong>NextGen X1</strong><span>od 320 000 PLN</span></div>
+              <div style="display:flex;justify-content:space-between"><strong>NextGen A5</strong><span>od 210 000 PLN</span></div>
+              <div style="display:flex;justify-content:space-between"><strong>NextGen R2</strong><span>od 480 000 PLN</span></div>
+            </div>
+            <div style="margin-top:12px"><button class="btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Poproś o ofertę</button></div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="portfolio">
+        <h2>Portfolio — wybrane wdrożenia</h2>
+        <div class="grid cols-3">
+          <div class="card">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1581094659642-9a3f1f5f7f7c?auto=format&fit=crop&w=900&q=60" alt="Automatyzacja linii">
+            <div style="margin-top:8px;color:#cfe1ff">Automatyzacja linii produkcyjnej — wzrost wydajności o 50%</div>
+          </div>
+          <div class="card">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=900&q=60" alt="Monitoring upraw">
+            <div style="margin-top:8px;color:#cfe1ff">Monitoring upraw dronami — 200 ha</div>
+          </div>
+          <div class="card">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?auto=format&fit=crop&w=900&q=60" alt="Robot patrolowy">
+            <div style="margin-top:8px;color:#cfe1ff">Robot patrolujący teren — praca autonomiczna</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="rnd">
+        <h2>Badania i rozwój (R&amp;D)</h2>
+        <p>Pracujemy nad algorytmami perception, optymalizacją ruchu, energooszczędnymi napędami i enkoderami o podwyższonej precyzji. Projekty w partnerstwie z uczelniami i instytutami badawczymi.</p>
+      </section>
+
+      <section id="blog">
+        <h2>Blog i zasoby</h2>
+        <div class="blog-grid">
+          <article class="post">
+            <h4>Sztuczna inteligencja w robotyce: Przyszłość już dziś</h4>
+            <div class="meta">14 lipca 2025 • 8 min czytania</div>
+            <p class="blog-excerpt">Jak AI zwiększa autonomię maszyn i skraca czas wdrożeń — case studies i implikacje dla przemysłu.</p>
+          </article>
+          <article class="post">
+            <h4>Innowacyjne materiały w konstrukcjach robotów</h4>
+            <div class="meta">28 czerwca 2025 • 6 min</div>
+            <p class="blog-excerpt">Przegląd kompozytów, stopów i rozwiązań poprawiających wydajność.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="contact">
+        <h2>Kontakt & zamówienia</h2>
+        <div class="contact-panel">
+          <form id="contactForm" action="https://formspree.io/f/yourformid" method="POST" novalidate>
+            <label for="name">Imię i nazwisko</label>
+            <input id="name" name="name" type="text" autocomplete="name" required>
+
+            <label for="email">E-mail</label>
+            <input id="email" name="_replyto" type="email" autocomplete="email" required>
+
+            <label for="company">Firma</label>
+            <input id="company" name="company" type="text" autocomplete="organization">
+
+            <label for="project">Opis projektu / oczekiwania</label>
+            <textarea id="project" name="message" rows="6" required></textarea>
+
+            <label for="file">Dodaj plik (specyfikacja) — opcjonalnie</label>
+            <input id="file" name="attachment" type="file" accept=".pdf,.docx" aria-describedby="fileHelp">
+            <div id="fileHelp" class="helper">Rozmiar do 10 MB (jeśli potrzebujesz większych plików użyj linku FTP/WeTransfer)</div>
+
+            <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
+              <button class="btn" type="submit">Wyślij zapytanie</button>
+              <div class="helper">Odpowiadamy w 24 godziny robocze</div>
+            </div>
+            <input type="hidden" name="_subject" value="Nowe zapytanie - NextGen Robotics">
+          </form>
+
+          <aside class="card">
+            <h3 style="color:var(--accent)">Dane kontaktowe</h3>
+            <p style="color:#cfe1ff">ul. Przemysłowa 12, 00-001 Warszawa</p>
+            <p><a href="tel:+48123456789">+48 123 456 789</a></p>
+            <p><a href="mailto:kontakt@nextgenrobotics.pl">kontakt@nextgenrobotics.pl</a></p>
+            <p style="margin-top:8px;color:#9fbfff">Godziny: Pon–Pt 9:00–17:00</p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="faq">
+        <h2>FAQ</h2>
+        <div class="item">
+          <button aria-expanded="false">Jak zamówić rozwiązanie?</button>
+          <div class="answer">Skontaktuj się przez formularz lub umów demo — przygotujemy analizę przedwdrożeniową i ofertę.</div>
+        </div>
+        <div class="item">
+          <button aria-expanded="false">Jakie są czasy realizacji?</button>
+          <div class="answer">Standardowo 4–8 tygodni, zależnie od specyfikacji i dostępności komponentów.</div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      <div style="max-width:var(--container);margin:0 auto;padding:18px;color:#6f88b8">© 2025 NextGen Robotics — Wszystkie prawa zastrzeżone • <a href="/privacy">Polityka prywatności</a> • <a href="/terms">Regulamin</a></div>
+    </footer>
+  </div>
+
+  <!-- =================== Advanced JS (configurator, ajax form, service worker register, analytics placeholders) =================== -->
+  <script>
+  (function(){
+    // Configurator logic: price approximator
+    const basePrice = 320000; // base for X1
+    const speedRange = document.getElementById('speedRange');
+    const payload = document.getElementById('payload');
+    const priceBox = document.getElementById('priceBox');
+    const speedValue = document.getElementById('speedValue');
+    const payloadValue = document.getElementById('payloadValue');
+    function updatePrice(){
+      const speedFactor = 1 + (Number(speedRange.value)-100)/400; // small multiplier
+      const payloadSurcharge = Number(payload.value) * 2500; // per kg
+      const estimated = Math.round((basePrice * speedFactor) + payloadSurcharge).toLocaleString('pl-PL') + ' PLN';
+      priceBox.textContent = 'Orientacyjna cena: ' + estimated;
+      speedValue.textContent = speedRange.value;
+      payloadValue.textContent = payload.value;
+    }
+    if(speedRange && payload){ speedRange.addEventListener('input', updatePrice); payload.addEventListener('input', updatePrice); updatePrice(); }
+
+    // FAQ accordion accessible
+    document.querySelectorAll('.faq .item').forEach(item=>{
+      const btn = item.querySelector('button');
+      const ans = item.querySelector('.answer');
+      btn.addEventListener('click', ()=>{
+        const open = item.classList.toggle('open');
+        btn.setAttribute('aria-expanded', open);
+        if(open){ ans.style.maxHeight = ans.scrollHeight + 'px'; } else { ans.style.maxHeight = null; }
+      });
+    });
+
+    // AJAX form submission with Formspree (fallback to normal POST if blocked)
+    const form = document.getElementById('contactForm');
+    if(form){
+      form.addEventListener('submit', async function(e){
+        e.preventDefault();
+        const data = new FormData(form);
+        const submitBtn = form.querySelector('button[type=submit]');
+        submitBtn.disabled = true; submitBtn.textContent = 'Wysyłanie...';
+        try{
+          const res = await fetch(form.action, {method:'POST',body:data,headers:{'Accept':'application/json'}});
+          if(res.ok){ alert('Dziękujemy — otrzymaliśmy Twoje zapytanie.'); form.reset(); }
+          else { const txt = await res.text(); console.warn(txt); alert('Wystąpił problem — spróbuj ponownie.'); }
+        }catch(err){ console.error(err); alert('Błąd sieci — sprawdź połączenie.'); }
+        submitBtn.disabled = false; submitBtn.textContent = 'Wyślij zapytanie';
+      });
+    }
+
+    // Service worker registration for PWA (if sw file exists)
+    if('serviceWorker' in navigator){
+      navigator.serviceWorker.register('/sw.js').then(()=>console.log('SW zarejestrowany')).catch(()=>{});
+    }
+
+    // Minimal performance: lazyload polyfill for older browsers (native loading used where supported)
+    if('loading' in HTMLImageElement.prototype){
+      document.querySelectorAll('img[loading="lazy"]').forEach(img=>{/* native */});
+    } else {
+      // simple dynamic import of lazysizes could be suggested; placeholder for enhancement
+      const s = document.createElement('script'); s.src='https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js'; document.body.appendChild(s);
+    }
+
+    // Analytics placeholder (GTM/GA) — replace with real IDs
+    window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-XXXXXXXXXX');
+
+    // Accessibility: add skip link behaviour
+    const skip = document.createElement('a'); skip.href='#main'; skip.textContent='Przejdź do treści'; skip.className='sr-only'; skip.style.position='absolute'; skip.style.left='-9999px'; skip.style.top='auto'; document.body.prepend(skip);
+
+  })();
+  </script>
+</body>
+</html>

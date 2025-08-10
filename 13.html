@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>La Bella Vita - Restauracja</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans&display=swap');
+
+  /* Reset & base */
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+  body {
+    font-family: 'Open Sans', sans-serif;
+    background: #121212;
+    color: #f3ede8;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  a {
+    color: #f3c677;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+
+  /* Layout Grid */
+  .container {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    min-height: 100vh;
+  }
+  nav {
+    background: rgba(30,30,30,0.9);
+    backdrop-filter: blur(15px);
+    border-right: 2px solid #cba258;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1.5rem;
+    position: sticky;
+    top: 0;
+  }
+  nav h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: #d9b24f;
+    margin-bottom: 2rem;
+    text-align: center;
+    letter-spacing: 2px;
+  }
+  nav a {
+    font-weight: 600;
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    transition: background 0.3s, color 0.3s;
+  }
+  nav a.active, nav a:hover {
+    background: #d9b24f;
+    color: #121212;
+    box-shadow: 0 0 10px #d9b24faa;
+  }
+
+  main {
+    padding: 2rem 3rem;
+    overflow-y: auto;
+  }
+
+  /* Hero Section */
+  .hero {
+    position: relative;
+    height: 60vh;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 3rem;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.7);
+  }
+  .hero img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.5);
+    transition: transform 0.6s ease;
+    will-change: transform;
+  }
+  .hero:hover img {
+    transform: scale(1.05);
+  }
+  .hero-text {
+    position: relative;
+    color: #f3ede8;
+    text-align: center;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+  }
+  .hero-text h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.8rem;
+    letter-spacing: 4px;
+    text-shadow: 3px 3px 10px rgba(0,0,0,0.7);
+    margin-bottom: 0.3rem;
+  }
+  .hero-text p {
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+  }
+
+  /* Section Titles */
+  h3.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    margin-bottom: 1rem;
+    border-left: 5px solid #d9b24f;
+    padding-left: 1rem;
+    color: #d9b24f;
+    user-select: none;
+  }
+
+  /* Menu Section */
+  .menu {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    gap: 2.2rem;
+  }
+
+  .menu-category {
+    background: rgba(255,255,255,0.05);
+    border-radius: 20px;
+    padding: 1.8rem 1.5rem;
+    box-shadow: 0 8px 25px rgba(217,178,79,0.3);
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.4s ease;
+  }
+  .menu-category:hover {
+    box-shadow: 0 12px 35px rgba(217,178,79,0.6);
+  }
+  .menu-category h4 {
+    font-family: 'Playfair Display', serif;
+    color: #d9b24f;
+    margin-bottom: 1rem;
+    text-align: center;
+    letter-spacing: 2px;
+  }
+  .dish {
+    margin-bottom: 1.2rem;
+    cursor: pointer;
+    position: relative;
+    border-radius: 12px;
+    padding: 0.8rem 1rem;
+    transition: background 0.3s;
+  }
+  .dish:hover {
+    background: rgba(217,178,79,0.15);
+  }
+  .dish .name {
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+  .dish .desc {
+    font-size: 0.9rem;
+    color: #d3c6adcc;
+    margin: 0.3rem 0 0 0;
+  }
+  .dish .price {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: 700;
+    color: #f3c677;
+  }
+
+  /* Modal Overlay */
+  .modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(18,18,18,0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  .modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .modal {
+    background: #222;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 450px;
+    padding: 2rem;
+    box-shadow: 0 0 25px #d9b24f;
+    color: #f3ede8;
+    position: relative;
+    transform: translateY(-30px);
+    transition: transform 0.3s ease;
+  }
+  .modal-overlay.active .modal {
+    transform: translateY(0);
+  }
+  .modal h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: #d9b24f;
+  }
+  .modal button.close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: transparent;
+    border: none;
+    font-size: 1.6rem;
+    color: #d9b24f;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+  .modal button.close:hover {
+    color: #f3c677;
+  }
+
+  /* Form styles */
+  form label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    margin-top: 1rem;
+    color: #d9b24f;
+  }
+  form input, form textarea, form select {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    border-radius: 12px;
+    border: none;
+    background: #333;
+    color: #f3ede8;
+    font-size: 1rem;
+    resize: none;
+    transition: background 0.3s;
+  }
+  form input:focus, form textarea:focus, form select:focus {
+    outline: 2px solid #d9b24f;
+    background: #2a2a2a;
+  }
+  form button {
+    margin-top: 1.5rem;
+    width: 100%;
+    padding: 0.9rem;
+    background: #d9b24f;
+    border: none;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #121212;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  form button:hover {
+    background: #f3c677;
+  }
+
+  /* Section style */
+  section {
+    margin-bottom: 4rem;
+  }
+
+  /* Kontakt info */
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    font-size: 1.05rem;
+  }
+  .contact-info strong {
+    color: #d9b24f;
+  }
+
+  /* Responsive */
+  @media (max-width: 1000px) {
+    .container {
+      grid-template-columns: 1fr;
+    }
+    nav {
+      position: relative;
+      flex-direction: row;
+      border-right: none;
+      border-bottom: 2px solid #cba258;
+      padding: 1rem 1.5rem;
+      overflow-x: auto;
+      gap: 1rem;
+    }
+    nav h1 {
+      font-size: 1.5rem;
+      margin-bottom: 0;
+      flex: 0 0 auto;
+    }
+    nav a {
+      margin-bottom: 0;
+      padding: 0.5rem 0.75rem;
+      white-space: nowrap;
+      flex: 0 0 auto;
+    }
+    main {
+      padding: 1rem 1.5rem;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <nav>
+    <h1>La Bella Vita</h1>
+    <a href="#hero" class="nav-link active">Start</a>
+    <a href="#menu" class="nav-link">Menu</a>
+    <a href="#o-nas" class="nav-link">O nas</a>
+    <a href="#rezerwacje" class="nav-link">Rezerwacje</a>
+    <a href="#kontakt" class="nav-link">Kontakt</a>
+  </nav>
+
+  <main>
+    <section id="hero" class="hero" aria-label="Baner powitalny restauracji">
+      <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=1350&q=80" alt="Włoska restauracja - smak i atmosfera" />
+      <div class="hero-text" role="banner">
+        <h2>Smak Włoch, pasja i tradycja</h2>
+        <p>Zapraszamy do La Bella Vita – wyjątkowej włoskiej restauracji w sercu miasta.</p>
+      </div>
+    </section>
+
+<section id="menu" aria-label="Menu restauracji">
+  <h3 class="section-title">Menu</h3>
+
+  <div class="menu">
+
+    <!-- Przystawki (5x) -->
+    <div class="menu-category" tabindex="0" aria-label="Przystawki">
+      <h4>Przystawki</h4>
+      <div class="dish" data-name="Bruschetta klasyczna" data-desc="Chrupiące pieczywo z pomidorami, bazylią i oliwą z oliwek" data-price="25">
+        <div class="name">Bruschetta klasyczna</div>
+        <div class="desc">Chrupiące pieczywo z pomidorami, bazylią i oliwą z oliwek</div>
+        <div class="price">25 zł</div>
+      </div>
+      <div class="dish" data-name="Carpaccio z wołowiny" data-desc="Cienko krojona polędwica z rukolą i parmezanem" data-price="38">
+        <div class="name">Carpaccio z wołowiny</div>
+        <div class="desc">Cienko krojona polędwica z rukolą i parmezanem</div>
+        <div class="price">38 zł</div>
+      </div>
+      <div class="dish" data-name="Frittura di calamari" data-desc="Smażone kalmary w lekko pikantnej panierce" data-price="42">
+        <div class="name">Frittura di calamari</div>
+        <div class="desc">Smażone kalmary w lekko pikantnej panierce</div>
+        <div class="price">42 zł</div>
+      </div>
+      <div class="dish" data-name="Sałatka Caprese" data-desc="Mozzarella, pomidory i świeża bazylia z oliwą" data-price="30">
+        <div class="name">Sałatka Caprese</div>
+        <div class="desc">Mozzarella, pomidory i świeża bazylia z oliwą</div>
+        <div class="price">30 zł</div>
+      </div>
+      <div class="dish" data-name="Carpaccio z łososia" data-desc="Cienko krojony łosoś z cytryną i koperkiem" data-price="40">
+        <div class="name">Carpaccio z łososia</div>
+        <div class="desc">Cienko krojony łosoś z cytryną i koperkiem</div>
+        <div class="price">40 zł</div>
+      </div>
+    </div>
+
+    <!-- Dania główne (5x) -->
+    <div class="menu-category" tabindex="0" aria-label="Dania główne">
+      <h4>Dania główne</h4>
+      <div class="dish" data-name="Risotto ai funghi" data-desc="Kremowe risotto z leśnymi grzybami i parmezanem" data-price="55">
+        <div class="name">Risotto ai funghi</div>
+        <div class="desc">Kremowe risotto z leśnymi grzybami i parmezanem</div>
+        <div class="price">55 zł</div>
+      </div>
+      <div class="dish" data-name="Tagliatelle al ragù" data-desc="Domowe wstążki makaronu z sosem mięsnym" data-price="58">
+        <div class="name">Tagliatelle al ragù</div>
+        <div class="desc">Domowe wstążki makaronu z sosem mięsnym</div>
+        <div class="price">58 zł</div>
+      </div>
+      <div class="dish" data-name="Saltimbocca alla romana" data-desc="Cielęcina z szynką parmeńską i szałwią" data-price="68">
+        <div class="name">Saltimbocca alla romana</div>
+        <div class="desc">Cielęcina z szynką parmeńską i szałwią</div>
+        <div class="price">68 zł</div>
+      </div>
+      <div class="dish" data-name="Pollo alla cacciatora" data-desc="Kurczak duszony z pomidorami, oliwkami i ziołami" data-price="60">
+        <div class="name">Pollo alla cacciatora</div>
+        <div class="desc">Kurczak duszony z pomidorami, oliwkami i ziołami</div>
+        <div class="price">60 zł</div>
+      </div>
+      <div class="dish" data-name="Lasagne al forno" data-desc="Tradycyjna włoska lasagne z mięsem i beszamelem" data-price="62">
+        <div class="name">Lasagne al forno</div>
+        <div class="desc">Tradycyjna włoska lasagne z mięsem i beszamelem</div>
+        <div class="price">62 zł</div>
+      </div>
+    </div>
+
+    <!-- Desery (5x) -->
+    <div class="menu-category" tabindex="0" aria-label="Desery">
+      <h4>Desery</h4>
+      <div class="dish" data-name="Tiramisu tradycyjne" data-desc="Klasyczny deser z mascarpone i kawą" data-price="28">
+        <div class="name">Tiramisu tradycyjne</div>
+        <div class="desc">Klasyczny deser z mascarpone i kawą</div>
+        <div class="price">28 zł</div>
+      </div>
+      <div class="dish" data-name="Panna cotta z malinami" data-desc="Delikatny deser śmietankowy z sosem malinowym" data-price="27">
+        <div class="name">Panna cotta z malinami</div>
+        <div class="desc">Delikatny deser śmietankowy z sosem malinowym</div>
+        <div class="price">27 zł</div>
+      </div>
+      <div class="dish" data-name="Gelato - lody włoskie" data-desc="Tradycyjne włoskie lody o różnych smakach" data-price="20">
+        <div class="name">Gelato - lody włoskie</div>
+        <div class="desc">Tradycyjne włoskie lody o różnych smakach</div>
+        <div class="price">20 zł</div>
+      </div>
+      <div class="dish" data-name="Cannoli siciliani" data-desc="Rurki z ciasta z kremem ricotta i skórką pomarańczy" data-price="29">
+        <div class="name">Cannoli siciliani</div>
+        <div class="desc">Rurki z ciasta z kremem ricotta i skórką pomarańczy</div>
+        <div class="price">29 zł</div>
+      </div>
+      <div class="dish" data-name="Sfogliatella napoletana" data-desc="Ciastko z chrupiącego ciasta z kremem waniliowym" data-price="26">
+        <div class="name">Sfogliatella napoletana</div>
+        <div class="desc">Ciastko z chrupiącego ciasta z kremem waniliowym</div>
+        <div class="price">26 zł</div>
+      </div>
+    </div>
+
+    <!-- Napoje (5x) -->
+    <div class="menu-category" tabindex="0" aria-label="Napoje">
+      <h4>Napoje</h4>
+      <div class="dish" data-name="Espresso" data-desc="Mocna włoska kawa" data-price="10">
+        <div class="name">Espresso</div>
+        <div class="desc">Mocna włoska kawa</div>
+        <div class="price">10 zł</div>
+      </div>
+      <div class="dish" data-name="Cappuccino" data-desc="Kawa z mlekiem i pianką" data-price="13">
+        <div class="name">Cappuccino</div>
+        <div class="desc">Kawa z mlekiem i pianką</div>
+        <div class="price">13 zł</div>
+      </div>
+      <div class="dish" data-name="Wino Chianti" data-desc="Czerwone wino z regionu Toskanii" data-price="45">
+        <div class="name">Wino Chianti</div>
+        <div class="desc">Czerwone wino z regionu Toskanii</div>
+        <div class="price">45 zł</div>
+      </div>
+      <div class="dish" data-name="Prosecco" data-desc="Musujące wino białe" data-price="50">
+        <div class="name">Prosecco</div>
+        <div class="desc">Musujące wino białe</div>
+        <div class="price">50 zł</div>
+      </div>
+      <div class="dish" data-name="Limoncello" data-desc="Cytrynowy likier włoski" data-price="35">
+        <div class="name">Limoncello</div>
+        <div class="desc">Cytrynowy likier włoski</div>
+        <div class="price">35 zł</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="o-nas" aria-label="O nas">
+  <h3 class="section-title">O nas</h3>
+  <p style="max-width: 700px; line-height: 1.7; font-size: 1.15rem; color: #d3c6ad;">
+    La Bella Vita to miejsce, gdzie tradycja włoskiej kuchni spotyka się z nowoczesnym podejściem do gotowania i serwowania. Nasza restauracja powstała z miłości do smaków Italii oraz pragnienia dzielenia się nimi z naszymi gośćmi. Od samego początku naszej działalności staramy się tworzyć niepowtarzalną atmosferę, która sprawi, że każdy posiłek będzie prawdziwą ucztą dla zmysłów.
+    <br /><br />
+    Nasza historia rozpoczęła się kilka lat temu, gdy grupa przyjaciół, zakochanych w kuchni włoskiej, postanowiła zrealizować swoje marzenie o miejscu, w którym smak i pasja do gotowania łączą się w harmonijną całość. Dzięki temu La Bella Vita jest nie tylko restauracją, ale także przestrzenią, gdzie każdy może poczuć się jak we Włoszech – od aromatu świeżo upieczonego chleba, przez intensywność dojrzałych pomidorów, aż po delikatność kremowego mascarpone.
+    <br /><br />
+    Naszym priorytetem jest używanie wyłącznie najwyższej jakości składników, które sprowadzamy bezpośrednio z Włoch lub wybieramy lokalnych dostawców gwarantujących świeżość i autentyczność. W menu znajdziesz zarówno klasyczne przysmaki, jak i nowoczesne wariacje na temat tradycyjnych receptur. Każde danie jest starannie przygotowywane przez naszych kucharzy, którzy łączą doświadczenie z kreatywnością.
+    <br /><br />
+    Wierzymy, że jedzenie to nie tylko zaspokojenie głodu, ale również sztuka, która pozwala na wyrażenie emocji i tworzenie wyjątkowych wspomnień. Dlatego dbamy o każdy detal – od wyboru odpowiedniego wina do potraw, przez estetykę podania, aż po obsługę na najwyższym poziomie. Nasz personel jest zawsze gotowy, aby doradzić i zadbać o komfort naszych gości.
+    <br /><br />
+    Atmosfera La Bella Vita to połączenie elegancji i przytulności. Wnętrze urządzone zostało w ciepłych, naturalnych kolorach, które przypominają słoneczne włoskie wybrzeża. Przytłumione światło świec oraz delikatna muzyka włoskich klasyków tworzą idealne tło do rodzinnych spotkań, romantycznych kolacji czy kameralnych przyjęć.
+    <br /><br />
+    Oprócz doskonałej kuchni oferujemy szeroki wybór autentycznych włoskich win, które zostały dobrane tak, by podkreślać smak naszych potraw. Nasz sommelier z przyjemnością pomoże dobrać idealny trunek, który uzupełni Twoje kulinarne doświadczenie.
+    <br /><br />
+    La Bella Vita to także miejsce przyjazne rodzinom z dziećmi oraz osobom z różnymi preferencjami dietetycznymi. W menu znajdziesz dania wegetariańskie, bezglutenowe oraz opcje dostosowane do alergii, które pozwolą każdemu znaleźć coś dla siebie.
+    <br /><br />
+    Poza codziennym menu organizujemy specjalne wydarzenia kulinarne, takie jak wieczory tematyczne, degustacje win czy warsztaty kulinarne prowadzone przez doświadczonych szefów kuchni. Chcemy dzielić się naszą pasją i wiedzą, aby każdy mógł zgłębić tajniki włoskiej sztuki gotowania.
+    <br /><br />
+    Nasza lokalizacja w centrum miasta sprawia, że jesteśmy łatwo dostępni zarówno dla mieszkańców, jak i turystów szukających autentycznych smaków Włoch. Zapraszamy do rezerwacji stolika i odkrywania kulinarnej podróży, którą przygotowaliśmy z myślą o Tobie.
+    <br /><br />
+    La Bella Vita to więcej niż restauracja — to przestrzeń, gdzie każdy może zatrzymać się na chwilę, odpocząć i poczuć prawdziwą magię włoskiej kuchni oraz kultury. Z nami odkryjesz bogactwo smaków, aromatów i historii, które sprawiają, że jedzenie staje się prawdziwą celebracją życia.
+    <br /><br />
+    Dziękujemy, że jesteś z nami i zapraszamy do doświadczenia prawdziwej La Bella Vita.
+  </p>
+</section>
+
+
+
+
+    <section id="rezerwacje" aria-label="Formularz rezerwacji">
+      <h3 class="section-title">Rezerwacje</h3>
+      <form id="reservation-form" novalidate>
+        <label for="name">Imię i nazwisko</label>
+        <input type="text" id="name" name="name" required minlength="3" placeholder="Jan Kowalski" />
+        
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required placeholder="jan@example.com" />
+        
+        <label for="phone">Telefon</label>
+        <input type="tel" id="phone" name="phone" pattern="^[0-9\s\-\+]{7,15}$" placeholder="+48 123 456 789" />
+        
+        <label for="date">Data rezerwacji</label>
+        <input type="date" id="date" name="date" required min="" />
+        
+        <label for="time">Godzina</label>
+        <select id="time" name="time" required>
+          <option value="" disabled selected>Wybierz godzinę</option>
+          <option>12:00</option>
+          <option>13:00</option>
+          <option>14:00</option>
+          <option>18:00</option>
+          <option>19:00</option>
+          <option>20:00</option>
+        </select>
+        
+        <label for="people">Liczba osób</label>
+        <input type="number" id="people" name="people" required min="1" max="20" placeholder="2" />
+        
+        <button type="submit">Zarezerwuj stolik</button>
+      </form>
+    </section>
+
+    <section id="kontakt" aria-label="Dane kontaktowe">
+      <h3 class="section-title">Kontakt</h3>
+      <div class="contact-info">
+        <div><strong>Adres:</strong> ul. Włoska 12, 00-950 Warszawa</div>
+        <div><strong>Telefon:</strong> +48 22 123 45 67</div>
+        <div><strong>Email:</strong> kontakt@labellavita.pl</div>
+        <div><strong>Godziny otwarcia:</strong> Pon-Pt 12:00 - 22:00, Sob-Nd 14:00 - 23:00</div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="modal-overlay" id="dish-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1">
+  <div class="modal">
+    <button class="close" aria-label="Zamknij modal">&times;</button>
+    <h3 id="modal-title"></h3>
+    <p id="modal-desc" style="margin-top: 1rem; font-size: 1.1rem; color: #555;"></p>
+    <p id="modal-price" style="font-weight: bold; margin-top: 0.5rem;"></p>
+  </div>
+</div>
+
+<script>
+  // Ustaw minimalną datę w formularzu na dzisiaj
+  const dateInput = document.getElementById('date');
+  const today = new Date().toISOString().split('T')[0];
+  dateInput.min = today;
+
+  // Obsługa modala potraw
+  const dishes = document.querySelectorAll('.dish');
+  const modal = document.getElementById('dish-modal');
+  const modalTitle = document.getElementById('modal-title');
+  const modalDesc = document.getElementById('modal-desc');
+  const modalPrice = document.getElementById('modal-price');
+  const modalClose = modal.querySelector('.close');
+
+  dishes.forEach(dish => {
+    dish.addEventListener('click', () => {
+      modalTitle.textContent = dish.dataset.name;
+      modalDesc.textContent = dish.dataset.desc;
+      modalPrice.textContent = dish.dataset.price + ' zł';
+      modal.style.display = 'flex';
+      modal.focus();
+    });
+  });
+
+  modalClose.addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
+
+  modal.addEventListener('click', e => {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
+
+  // Formularz rezerwacji (prosta walidacja)
+  const reservationForm = document.getElementById('reservation-form');
+  reservationForm.addEventListener('submit', e => {
+    e.preventDefault();
+    if (!reservationForm.checkValidity()) {
+      alert('Proszę uzupełnić wszystkie wymagane pola poprawnie.');
+      return;
+    }
+    alert('Dziękujemy za rezerwację! Skontaktujemy się z Tobą wkrótce.');
+    reservationForm.reset();
+  });
+</script>
+
+<style>
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f5f1;
+    color: #4a3c31;
+    margin: 0;
+    padding: 0;
+  }
+  header {
+    background-color: #b94e1c;
+    color: #fff;
+    padding: 1rem;
+    text-align: center;
+  }
+  nav {
+    background-color: #e07b39;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0.5rem 0;
+  }
+  nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 4px;
+  }
+  nav a:hover,
+  nav a:focus {
+    background-color: #a45c25;
+  }
+  main {
+    max-width: 900px;
+    margin: 1rem auto;
+    padding: 0 1rem;
+  }
+  .section-title {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 2px solid #b94e1c;
+    padding-bottom: 0.3rem;
+  }
+  .menu-category {
+    margin-bottom: 2rem;
+  }
+  .menu-category h4 {
+    color: #b94e1c;
+    margin-bottom: 0.8rem;
+  }
+  .dish {
+    background-color: #fff;
+    padding: 0.7rem 1rem;
+    border-radius: 6px;
+    margin-bottom: 0.7rem;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 0.1);
+    transition: background-color 0.3s ease;
+  }
+  .dish:hover,
+  .dish:focus {
+    background-color: #f3e4d8;
+    outline: none;
+  }
+  .dish .name {
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+  .dish .desc {
+    font-size: 0.95rem;
+    color: #6b5e4b;
+    margin-top: 0.3rem;
+  }
+  .dish .price {
+    margin-top: 0.5rem;
+    font-weight: 700;
+    color: #b94e1c;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    max-width: 400px;
+  }
+  label {
+    font-weight: 600;
+  }
+  input, select, button {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    border: 1px solid #b94e1c;
+  }
+  input:focus, select:focus, button:focus {
+    outline: 2px solid #b94e1c;
+  }
+  button {
+    background-color: #b94e1c;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+  }
+  button:hover, button:focus {
+    background-color: #8c3a11;
+  }
+  .contact-info {
+    max-width: 400px;
+    line-height: 1.6;
+    font-size: 1.1rem;
+    color: #6b5e4b;
+  }
+  .modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.4);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    z-index: 1000;
+  }
+  .modal {
+    background: #fff;
+    padding: 1.5rem 2rem;
+    border-radius: 8px;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.15);
+    position: relative;
+  }
+  .modal .close {
+    position: absolute;
+    top: 0.6rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #b94e1c;
+    font-weight: 700;
+  }
+  .modal .close:hover,
+  .modal .close:focus {
+    color: #8c3a11;
+    outline: none;
+  }
+</style>

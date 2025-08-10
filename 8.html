@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>EcoLoop - Wypożyczaj, dziel się, oszczędzaj! | Platforma sharingowa</title>
+  <meta name="description" content="EcoLoop — lokalna platforma gospodarki współdzielenia. Wypożyczaj narzędzia, sprzęt sportowy, elektronika i artykuły dla dzieci. Rezerwacje, oceny, bezpieczne płatności i integracja z mapą.">
+  <meta name="keywords" content="wypożyczalnia, sharing economy, gospodarka współdzielenia, wypożyczaj, wynajem, EcoLoop, lokalne ogłoszenia">
+  <meta name="author" content="EcoLoop">
+  <link rel="canonical" href="https://ecoloop.example.pl/">
+
+  <!-- OpenGraph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="EcoLoop - Wypożyczaj, dziel się, oszczędzaj!">
+  <meta property="og:description" content="Platforma do wypożyczania i dzielenia się przedmiotami w Twojej okolicy. Rejestracja, oferty, bezpieczeństwo i opinie użytkowników.">
+  <meta property="og:image" content="https://ecoloop.example.pl/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- JSON-LD: Organization + WebSite -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"EcoLoop",
+    "url":"https://ecoloop.example.pl",
+    "logo":"https://ecoloop.example.pl/logo.png",
+    "sameAs":["https://www.facebook.com/ecoloop","https://www.instagram.com/ecoloop"],
+    "contactPoint":[{"@type":"ContactPoint","telephone":"+48 123 456 789","contactType":"customer support","areaServed":"PL","availableLanguage":["Polish"]}]
+  }
+  </script>
+
+  <!-- PWA manifest hint -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#2a6721">
+  <link rel="icon" href="/favicon.ico">
+
+  <!-- Fonts and preconnect -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Poppins:wght@600;800&display=swap" rel="stylesheet">
+
+  <style>
+  /* Compact but feature-rich styles (responsive, variables, dark-mode) */
+  :root{--bg:#f8faf7;--panel:#ffffff;--accent:#2a6721;--accent-2:#5ca94a;--muted:#556b3a;--radius:12px;--glass:rgba(42,103,33,0.06);--max:1140px}
+  *{box-sizing:border-box}
+  html{font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-size:16px;scroll-behavior:smooth}
+  body{margin:0;min-height:100vh;background:var(--bg);color:#123;display:flex;flex-direction:column}
+  a{color:var(--accent)}
+  .container{width:90%;max-width:var(--max);margin:0 auto;padding:20px}
+
+  header{background:linear-gradient(90deg,var(--accent-2),var(--accent));color:#fff;padding:18px 0;position:sticky;top:0;z-index:1200;box-shadow:0 6px 18px rgba(0,0,0,0.08)}
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:18px}
+  .brand{display:flex;align-items:center;gap:12px}
+  .logo{width:56px;height:56px;border-radius:10px;background:#fff;color:var(--accent);display:grid;place-items:center;font-weight:800}
+  nav ul{display:flex;gap:14px;list-style:none;margin:0;padding:0}
+  nav a{color:#f0fff0;text-decoration:none;font-weight:600;padding:8px;border-radius:8px}
+  .cta{display:flex;gap:10px}
+  .btn{background:#fff;color:var(--accent);border:none;padding:10px 14px;border-radius:999px;font-weight:700;cursor:pointer}
+  .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.15);color:#f7fff6}
+
+  /* Hero */
+  .hero{display:grid;grid-template-columns:1fr 380px;gap:18px;align-items:center;margin:22px 0}
+  .hero .panel{background:linear-gradient(180deg,#ffffff,#f0f7ee);padding:28px;border-radius:14px;box-shadow:0 10px 30px rgba(42,103,33,0.06)}
+  .hero h1{font-family:Poppins,system-ui;font-size:2.4rem;margin:0;color:var(--accent)}
+  .hero p{color:var(--muted)}
+
+  /* Map + search */
+  .searchbar{display:flex;gap:10px;margin-top:12px}
+  .searchbar input,.searchbar select{flex:1;padding:12px;border-radius:10px;border:1px solid #d6e6cd}
+  #map{height:320px;border-radius:10px;overflow:hidden}
+
+  /* Grid sections */
+  main{display:grid;grid-template-columns:2fr 1fr;gap:22px}
+  section{background:var(--panel);padding:18px;border-radius:12px}
+  .offers{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+  .card{background:linear-gradient(180deg,#fff,#f8fff3);padding:14px;border-radius:10px;border:1px solid #e7f1e2}
+  .card h4{margin:0 0 8px 0;color:var(--accent)}
+  .meta{font-size:0.9rem;color:var(--muted)}
+
+  /* Contact form */
+  form{display:grid;gap:10px}
+  input,textarea,select{padding:12px;border-radius:8px;border:1px solid #dfeede}
+  button[type=submit]{background:var(--accent);color:#fff;padding:12px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
+
+  /* Footer */
+  footer{background:#0f2610;color:#dfeee1;padding:18px;margin-top:22px;border-top:1px solid rgba(0,0,0,0.04)}
+
+  /* Responsive */
+  @media(max-width:900px){.hero{grid-template-columns:1fr}.container{padding:12px}main{grid-template-columns:1fr}.nav{flex-direction:column;gap:12px}nav ul{flex-wrap:wrap;justify-content:center}}
+
+  /* Dark-mode preference */
+  @media(prefers-color-scheme:dark){:root{--bg:#08120a;--panel:#09120b;color:#dbeadf;--accent:#7fb86f}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav" role="navigation" aria-label="Główne menu">
+      <div class="brand">
+        <div class="logo" aria-hidden>EL</div>
+        <div>
+          <strong>EcoLoop</strong>
+          <div style="font-size:0.9rem;opacity:0.9">Wypożyczaj • Dziel się • Oszczędzaj</div>
+        </div>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#hero">Start</a></li>
+          <li><a href="#how-it-works">Jak to działa</a></li>
+          <li><a href="#offer">Oferta</a></li>
+          <li><a href="#about">O nas</a></li>
+          <li><a href="#contact">Kontakt</a></li>
+        </ul>
+      </nav>
+      <div class="cta">
+        <button class="btn" id="addListingBtn">Dodaj ofertę</button>
+        <button class="btn secondary" id="loginBtn">Zaloguj</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero" id="hero" aria-label="Witamy">
+      <div class="panel" aria-labelledby="hero-title">
+        <h1 id="hero-title">EcoLoop — Wypożyczaj, dziel się, oszczędzaj!</h1>
+        <p>Znajdź przedmioty do wypożyczenia w Twojej okolicy, wystaw to, czego nie używasz i zarabiaj. Mniej konsumpcji, więcej sensu.</p>
+
+        <div class="searchbar" role="search" aria-label="Szukaj ofert">
+          <input id="q" placeholder="Co chcesz wypożyczyć? np. wiertarka, rower..." aria-label="Szukaj przedmiotów">
+          <select id="category" aria-label="Kategoria">
+            <option value="">Wszystkie kategorie</option>
+            <option value="tools">Narzędzia</option>
+            <option value="sports">Sprzęt sportowy</option>
+            <option value="electronics">Elektronika</option>
+            <option value="kids">Dzieci</option>
+          </select>
+          <button class="btn" id="searchBtn">Szukaj</button>
+        </div>
+        <div style="margin-top:12px;color:var(--muted);font-size:0.95rem">Tip: użyj lokalizacji, aby znaleźć oferty w pobliżu. 🔍</div>
+      </div>
+
+      <aside>
+        <div id="map" aria-label="Mapa ofert" role="img">Map loading…</div>
+      </aside>
+    </section>
+
+    <section id="offer">
+      <h3>Oferty w pobliżu</h3>
+      <div id="offersList" class="offers" aria-live="polite"></div>
+    </section>
+
+    <aside>
+      <section id="how-it-works">
+        <h3>Jak to działa</h3>
+        <ol>
+          <li>Znajdź przedmiot — wyszukaj po nazwie lub kategorii.</li>
+          <li>Skontaktuj się z właścicielem przez bezpieczny system wiadomości.</li>
+          <li>Umów odbiór lub dostawę — oceniaj po zakończonej transakcji.</li>
+        </ol>
+      </section>
+
+      <section id="about" style="margin-top:18px">
+        <h3>O nas</h3>
+        <p>EcoLoop wspiera lokalne społeczności, redukuje nadprodukcję i promuje zrównoważony styl życia.</p>
+      </section>
+
+      <section id="actions" style="margin-top:18px">
+        <h3>Szybkie akcje</h3>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn" id="nearMeBtn">Pokaż w pobliżu</button>
+          <button class="btn secondary" id="filterFree">Tylko darmowe</button>
+        </div>
+      </section>
+    </aside>
+
+    <section id="contact">
+      <h3>Kontakt / Rezerwacja</h3>
+      <form id="contactForm" aria-label="Formularz kontaktowy">
+        <label for="name">Imię i nazwisko</label>
+        <input id="name" name="name" required>
+        <label for="email">E-mail</label>
+        <input id="email" name="email" type="email" required>
+        <label for="item">Przedmiot</label>
+        <input id="item" name="item" required>
+        <label for="when">Preferowany termin</label>
+        <input id="when" name="when" type="date">
+        <label for="message">Wiadomość</label>
+        <textarea id="message" name="message" rows="4"></textarea>
+        <button type="submit">Wyślij zapytanie</button>
+        <div id="contactStatus" aria-live="polite" style="margin-top:8px"></div>
+      </form>
+    </section>
+
+  </main>
+
+  <footer class="container">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+      <div>© 2025 EcoLoop. Wszystkie prawa zastrzeżone.</div>
+      <div style="color:var(--muted)">ul. Zielona 5, Warszawa • <a href="tel:+48123456789">+48 123 456 789</a></div>
+    </div>
+  </footer>
+
+  <!-- Offline light-weight DB & service worker registration + map (Leaflet) -->
+  <script>
+  (function(){
+    // Feature-detect: IndexedDB wrapper (simple)
+    const dbName = 'ecoloop-db'; const dbVersion = 1; let db;
+    function openDB(){ return new Promise((res,rej)=>{ const r=indexedDB.open(dbName,dbVersion); r.onupgradeneeded = ()=>{ const idb=r.result; if(!idb.objectStoreNames.contains('listings')) idb.createObjectStore('listings',{keyPath:'id'}); }; r.onsuccess=()=>{ db=r.result; res(db); }; r.onerror=()=>rej(r.error); }); }
+
+    // Initialize demo listings if empty
+    async function seedIfEmpty(){ await openDB(); const tx=db.transaction('listings','readwrite'); const store=tx.objectStore('listings'); const req=store.count(); req.onsuccess=()=>{ if(req.result===0){ const demo=[
+      {id:'tool-1',title:'Wiertarka udarowa',category:'tools',price:35,location:{lat:52.23,lng:21.01},owner:'Marek'},
+      {id:'bike-1',title:'Rower górski',category:'sports',price:50,location:{lat:52.22,lng:21.02},owner:'Anna'},
+      {id:'drone-1',title:'Dron FPV',category:'electronics',price:80,location:{lat:52.24,lng:21.00},owner:'Piotr'}
+    ]; demo.forEach(i=>store.put(i)); }
+    }; }
+
+    // Read all listings
+    async function getAll(){ await openDB(); return new Promise((res,rej)=>{ const tx=db.transaction('listings','readonly'); const store=tx.objectStore('listings'); const req=store.getAll(); req.onsuccess=()=>res(req.result); req.onerror=()=>rej(req.error); }); }
+
+    // Render offers
+    const offersList = document.getElementById('offersList'); async function renderOffers(filter){ const all=await getAll(); const q=document.getElementById('q').value.toLowerCase(); const cat=document.getElementById('category').value; let list=all.filter(i=>(!cat||i.category===cat)); if(q) list=list.filter(i=>(i.title||'').toLowerCase().includes(q)); offersList.innerHTML=''; if(list.length===0){ offersList.innerHTML='<div class="card">Brak ofert. Możesz dodać pierwszą ofertę!</div>'; return; } list.forEach(item=>{ const div=document.createElement('article'); div.className='card'; div.tabIndex=0; div.innerHTML=`<h4>${escapeHtml(item.title)}</h4><div class="meta">Kategoria: ${escapeHtml(item.category)} • Cena: ${item.price} zł/dzień</div><p style="margin-top:8px">Właściciel: ${escapeHtml(item.owner)}</p><div style="margin-top:10px"><button class="btn" data-id="${item.id}">Rezerwuj</button> <button class="btn secondary" data-id="${item.id}" data-action="report">Zgłoś</button></div>`; offersList.appendChild(div); }); }
+
+    // Simple HTML escape
+    function escapeHtml(s){ return String(s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+    // Wire search
+    document.getElementById('searchBtn').addEventListener('click', ()=>renderOffers()); document.getElementById('q').addEventListener('keyup', e=>{ if(e.key==='Enter') renderOffers(); });
+
+    // Geolocation + map (Leaflet) lazy-load
+    async function loadMap(){ if(window._mapLoaded) return; window._mapLoaded=true; const Lsrc='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'; const css='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css'; const l=document.createElement('link'); l.rel='stylesheet'; l.href=css; document.head.appendChild(l); await loadScript(Lsrc);
+      const map = L.map('map').setView([52.23,21.01], 12); L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19}).addTo(map);
+      // place markers for listings
+      const all = await getAll(); all.forEach(it=>{ if(it.location){ L.marker([it.location.lat,it.location.lng]).addTo(map).bindPopup(`<strong>${escapeHtml(it.title)}</strong><br>${escapeHtml(it.owner)}`); } });
+      // near me button
+      document.getElementById('nearMeBtn').addEventListener('click', ()=>{ if(navigator.geolocation){ navigator.geolocation.getCurrentPosition(pos=>{ map.setView([pos.coords.latitude,pos.coords.longitude],13); L.circle([pos.coords.latitude,pos.coords.longitude],{radius:200}).addTo(map); }, err=>alert('Nie można pobrać lokalizacji.')); } else alert('Geolokalizacja niedostępna'); });
+    }
+
+    function loadScript(src){ return new Promise((res,rej)=>{ const s=document.createElement('script'); s.src=src; s.onload=res; s.onerror=rej; document.body.appendChild(s); }); }
+
+    // Contact form submit -> Formspree (demo) + client validation
+    const contactForm=document.getElementById('contactForm'); const contactStatus=document.getElementById('contactStatus'); contactForm.addEventListener('submit', async e=>{ e.preventDefault(); contactStatus.textContent=''; const data=new FormData(contactForm); if(!data.get('name')||!data.get('email')||!data.get('item')){ contactStatus.textContent='Uzupełnij wymagane pola.'; contactStatus.style.color='#a33'; return; } contactStatus.textContent='Wysyłanie…'; try{ const res=await fetch('https://formspree.io/f/yourFormID',{method:'POST',body:data,headers:{'Accept':'application/json'}}); if(res.ok){ contactStatus.textContent='Dziękujemy! Otrzymaliśmy wiadomość.'; contactStatus.style.color='#2a7'; contactForm.reset(); } else { contactStatus.textContent='Błąd wysyłki. Spróbuj ponownie.'; contactStatus.style.color='#a33'; } }catch(err){ contactStatus.textContent='Błąd sieci. Sprawdź połączenie.'; contactStatus.style.color='#a33'; }});
+
+    // Add listing mock (opens a prompt — replace with modal / upload in production)
+    document.getElementById('addListingBtn').addEventListener('click', async ()=>{
+      const title=prompt('Nazwa przedmiotu (np. Wiertarka udarowa)'); if(!title) return; const price=prompt('Cena za dzień (PLN)'); const cat=prompt('Kategoria (tools/sports/electronics/kids)'); const owner=prompt('Twoje imię'); const lat=prompt('Szer. geogr. (np. 52.23)'); const lng=prompt('Dług. geogr. (np. 21.01)'); await openDB(); const tx=db.transaction('listings','readwrite'); tx.objectStore('listings').put({id: 'loc-'+Date.now(),title,price: Number(price)||0,category:cat||'tools',owner:owner||'anon',location:{lat: Number(lat)||52.23,lng:Number(lng)||21.01}}); tx.oncomplete=()=>{ alert('Oferta dodana (lokalnie). W prawdziwej aplikacji zapiszemy to na serwerze.'); renderOffers(); loadMap(); };
+    });
+
+    // Init
+    seedIfEmpty().then(()=>{ renderOffers(); /* only load map when user interacts or map is visible */ const io=new IntersectionObserver(entries=>{ if(entries.some(e=>e.isIntersecting)){ loadMap(); io.disconnect(); } },{threshold:0.15}); io.observe(document.getElementById('map')); });
+
+    // Service worker registration for PWA
+    if('serviceWorker' in navigator){ navigator.serviceWorker.register('/sw.js').then(()=>console.log('SW registered')).catch(()=>console.warn('SW failed')); }
+
+    // Small accessibility & keyboard helpers
+    document.addEventListener('keydown', e=>{ if(e.key==='/' && document.activeElement.tagName!=='INPUT') { e.preventDefault(); document.getElementById('q').focus(); } });
+
+  })();
+  </script>
+</body>
+</html>

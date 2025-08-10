@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mythbound Studios - Pełna oferta</title>
+  <style>
+    /* Podstawowy reset i fonty */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: #121214;
+      color: #e0e0e0;
+      line-height: 1.6;
+    }
+    a {
+      color: #8b5cf6;
+      text-decoration: none;
+      margin: 0 12px;
+      font-weight: 600;
+    }
+    a:hover {
+      color: #c084fc;
+    }
+    header {
+      background-color: #6366f1;
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      transition: background-color 0.5s ease;
+      box-shadow: 0 2px 10px rgba(99,102,241,0.4);
+    }
+    header.scrolled {
+      background-color: #4f46e5;
+      box-shadow: 0 3px 15px rgba(79,70,229,0.7);
+    }
+    header .container {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1rem;
+    }
+    nav a {
+      font-size: 1rem;
+      transition: color 0.3s;
+    }
+    main {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    h1, h2, h3 {
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #a78bfa;
+    }
+    section {
+      margin-bottom: 4rem;
+      background: #1f1f2e;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(167,139,250,0.2);
+    }
+    .hero {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: linear-gradient(135deg, #7c3aed, #a78bfa);
+      color: white;
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(123,58,237,0.7);
+    }
+    .hero h2 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      animation: fadeScale 1.5s ease forwards;
+    }
+    .hero p {
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .btn-primary, .btn-secondary {
+      padding: 0.8rem 1.6rem;
+      border: none;
+      border-radius: 25px;
+      font-weight: 700;
+      cursor: pointer;
+      margin: 0 0.5rem;
+      transition: background-color 0.3s ease;
+      font-size: 1rem;
+    }
+    .btn-primary {
+      background-color: #7c3aed;
+      color: white;
+    }
+    .btn-primary:hover {
+      background-color: #5b21b6;
+    }
+    .btn-secondary {
+      background-color: #a78bfa;
+      color: #2c2c37;
+    }
+    .btn-secondary:hover {
+      background-color: #7c3aed;
+      color: white;
+    }
+    @keyframes fadeScale {
+      0% {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* Karty gier */
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 2rem;
+    }
+    .game-card {
+      background: #29293d;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(167,139,250,0.3);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease;
+    }
+    .game-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 25px rgba(167,139,250,0.6);
+    }
+    .game-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .game-content {
+      padding: 1rem 1.2rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .game-title {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.3rem;
+      color: #c084fc;
+    }
+    .game-description {
+      flex-grow: 1;
+      font-size: 0.95rem;
+      margin-bottom: 0.8rem;
+      color: #d1d5db;
+    }
+    .game-features {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 0.85rem;
+      color: #a5b4fc;
+    }
+    .game-features li {
+      margin-bottom: 0.25rem;
+    }
+
+    /* Długie teksty w sekcjach */
+    .long-text {
+      max-width: 900px;
+      margin: 0 auto;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #ddd6fe;
+      white-space: pre-line;
+    }
+
+    /* FAQ */
+    .faq-item {
+      margin-bottom: 1.5rem;
+    }
+    .faq-question {
+      font-weight: 700;
+      cursor: pointer;
+      margin-bottom: 0.3rem;
+      color: #a78bfa;
+    }
+    .faq-answer {
+      display: none;
+      padding-left: 1rem;
+      color: #c4b5fd;
+    }
+    .faq-item.open .faq-answer {
+      display: block;
+    }
+
+    /* Przycisk scroll-top */
+    #scrollTopBtn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #6366f1;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      padding: 0.8rem 1rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(99, 102, 241, 0.7);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 999;
+    }
+    #scrollTopBtn.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Responsywność */
+    @media (max-width: 600px) {
+      section.hero h2 {
+        font-size: 2.2rem;
+      }
+      .game-img {
+        height: 140px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header id="mainHeader">
+    <div class="container">
+      <h1 class="text-2xl font-bold text-indigo-400">Mythbound Studios</h1>
+      <nav>
+        <a href="#gry">Gry</a>
+        <a href="#about">O nas</a>
+        <a href="#faq">FAQ</a>
+        <a href="#blog">Blog</a>
+        <a href="#team">Zespół</a>
+        <a href="#career">Kariera</a>
+        <a href="#partners">Partnerzy</a>
+        <a href="#kontakt">Kontakt</a>
+        <a href="#support">Wsparcie</a>
+        <a href="#polityka">Polityka Prywatności</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h2>Tworzymy fantastyczne gry, które pokochasz!</h2>
+      <p>Od epickich przygód po dynamiczne wyzwania — u nas znajdziesz wszystko, co najlepsze w świecie gier.</p>
+      <button class="btn-primary" onclick="alert('Wkrótce nowe gry!')">Sprawdź ofertę</button>
+      <button class="btn-secondary" onclick="scrollToSection('gry')">Nasze Gry</button>
+    </section>
+
+    <section id="gry">
+      <h2>Nasze Gry</h2>
+      <div class="games-grid">
+        <article class="game-card">
+          <img src="https://images.unsplash.com/photo-1603780585271-c764d36bfc81?auto=format&fit=crop&w=800&q=80" alt="Gra Przygoda" class="game-img" />
+          <div class="game-content">
+            <h3 class="game-title">Przygoda Cienia</h3>
+            <p class="game-description">
+              Eksploruj mroczne światy, odkrywaj tajemnice i walcz z potworami w tej klimatycznej grze RPG.
+            </p>
+            <ul class="game-features">
+              <li>Tryb singleplayer</li>
+              <li>Otwarte światy</li>
+              <li>Bogata fabuła</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="game-card">
+          <img src="https://cdn.pixabay.com/photo/2020/04/10/20/43/video-game-5034203_1280.jpg" alt="Gra Strategiczna" class="game-img" />
+          <div class="game-content">
+            <h3 class="game-title">Królestwo Strategii</h3>
+            <p class="game-description">
+              Buduj imperium, zarządzaj zasobami i pokonaj przeciwników w strategicznej grze multiplayer.
+            </p>
+            <ul class="game-features">
+              <li>Tryb multiplayer</li>
+              <li>Rozbudowane drzewko technologii</li>
+              <li>Turnieje online</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="game-card">
+          <img src="https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=800&q=80" alt="Gra Platformowa" class="game-img" />
+          <div class="game-content">
+            <h3 class="game-title">Skoki Bohatera</h3>
+            <p class="game-description">
+              Dynamiczna platformówka z unikalnymi poziomami i wymagającymi bossami.
+            </p>
+            <ul class="game-features">
+              <li>Wyzwania czasowe</li>
+              <li>Różnorodne światy</li>
+              <li>Tryb kooperacji</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="game-card">
+          <img src="https://cdn.pixabay.com/photo/2021/10/10/10/24/game-6690971_1280.jpg" alt="Gra RPG" class="game-img" />
+          <div class="game-content">
+            <h3 class="game-title">Magia Przeznaczenia</h3>
+            <p class="game-description">
+              Wciel się w potężnego maga i odkryj tajemnice pradawnych zaklęć.
+            </p>
+            <ul class="game-features">
+              <li>Rozbudowany system magii</li>
+              <li>Eksploracja świata</li>
+              <li>Tryb PvP</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="game-card">
+          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Gra Sci-Fi" class="game-img" />
+          <div class="game-content">
+            <h3 class="game-title">Galaktyczny Sojusz</h3>
+            <p class="game-description">
+              Weź udział w międzygwiezdnych bitwach, buduj floty i zdobywaj nowe planety w epickiej strategii sci-fi.
+            </p>
+            <ul class="game-features">
+              <li>Tryb kampanii</li>
+              <li>Rozbudowany system dyplomacji</li>
+              <li>Bitwy w czasie rzeczywistym</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="game-card">
+          <img src="https://images.unsplash.com/photo-1549924231-c9d1c28d3b72?auto=format&fit=crop&w=800&q=80" alt="Gra Przygodowa" class="game-img" />
+          <div class="game-content">
+            <h3 class="game-title">Tajemnice Starego Lasu</h3>
+            <p class="game-description">
+              Odkrywaj zagadki, rozwiązuj łamigłówki i poznaj historię tajemniczego lasu pełnego magii.
+            </p>
+            <ul class="game-features">
+              <li>Tryb eksploracji</li>
+              <li>Interaktywne postacie</li>
+              <li>Wciągająca fabuła</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="game-card">
+          <img src="https://images.unsplash.com/photo-1529243856184-fd546548898b?auto=format&fit=crop&w=800&q=80" alt="Gra FPS" class="game-img" />
+          <div class="game-content">
+            <h3 class="game-title">Shadow Strike</h3>
+            <p class="game-description">
+              Intensywna strzelanka z trybem multiplayer, gdzie liczy się refleks i taktyka zespołowa.
+            </p>
+            <ul class="game-features">
+              <li>Tryb multiplayer 16 vs 16</li>
+              <li>Różnorodne mapy</li>
+              <li>Rozbudowany system broni</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="game-card">
+          <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80" alt="Gra logiczna" class="game-img" />
+          <div class="game-content">
+            <h3 class="game-title">Łamigłówki Mistrza</h3>
+            <p class="game-description">
+              Seria wymagających zagadek logicznych, które sprawdzą twoją kreatywność i umiejętność rozwiązywania problemów.
+            </p>
+            <ul class="game-features">
+              <li>Setki unikalnych poziomów</li>
+              <li>Tryb rywalizacji online</li>
+              <li>Wsparcie dla tabletów i telefonów</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="game-card">
+          <img src="https://images.unsplash.com/photo-1536305031960-98f9f25c59b8?auto=format&fit=crop&w=800&q=80" alt="Gra wyścigowa" class="game-img" />
+          <div class="game-content">
+            <h3 class="game-title">Turbo Drive</h3>
+            <p class="game-description">
+              Szybkie wyścigi z realistyczną fizyką, mnóstwem pojazdów i tras w różnych zakątkach świata.
+            </p>
+            <ul class="game-features">
+              <li>Tryb kariery</li>
+              <li>Wyścigi online</li>
+              <li>Personalizacja samochodów</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="game-card">
+          <img src="https://images.unsplash.com/photo-1532634726-6052355a1f3f?auto=format&fit=crop&w=800&q=80" alt="Gra survival" class="game-img" />
+          <div class="game-content">
+            <h3 class="game-title">Ocalenie</h3>
+            <p class="game-description">
+              Przetrwaj w postapokaliptycznym świecie, zbieraj zasoby i buduj schronienia przeciwko niebezpieczeństwom.
+            </p>
+            <ul class="game-features">
+              <li>Tryb sandbox</li>
+              <li>Rozbudowana mechanika rzemiosła</li>
+              <li>Kooperacja z innymi graczami</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="game-card">
+          <img src="https://images.unsplash.com/photo-1512427691650-700b95b6e105?auto=format&fit=crop&w=800&q=80" alt="Gra muzyczna" class="game-img" />
+          <div class="game-content">
+            <h3 class="game-title">Rytmy Miasta</h3>
+            <p class="game-description">
+              Gra muzyczna z oryginalnymi ścieżkami dźwiękowymi i dynamiczną rozgrywką rytmiczną.
+            </p>
+            <ul class="game-features">
+              <li>Setki utworów</li>
+              <li>Tryb wyzwań</li>
+              <li>Ranking globalny</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="game-card">
+          <img src="https://images.unsplash.com/photo-1520671367765-3f1333f09570?auto=format&fit=crop&w=800&q=80" alt="Gra przygodowa" class="game-img" />
+          <div class="game-content">
+            <h3 class="game-title">Legenda Smoczych Gór</h3>
+            <p class="game-description">
+              Epicka przygoda w świecie fantasy, pełna smoków, magii i niebezpiecznych questów.
+            </p>
+            <ul class="game-features">
+              <li>Otwarte światy</li>
+              <li>Rozbudowana fabuła</li>
+              <li>Tryb multiplayer co-op</li>
+            </ul>
+          </div>
+        </article>
+
+        <section id="about">
+  <h2>O nas</h2>
+  <p class="long-text">
+    Mythbound Studios to zespół prawdziwych pasjonatów gier wideo, którzy od wielu lat z zaangażowaniem tworzą projekty na najwyższym poziomie. Nasza historia sięga czasów, gdy sami jako gracze szukaliśmy nowych, oryginalnych światów do odkrycia i emocjonujących doświadczeń. Z biegiem lat zgromadziliśmy bogate doświadczenie w różnych dziedzinach branży – od programowania i projektowania graficznego, przez muzykę, aż po storytelling i projektowanie mechanik rozgrywki. W Mythbound Studios wierzymy, że gra to nie tylko zabawa, lecz przede wszystkim sztuka, która potrafi poruszyć, zainspirować i połączyć ludzi z całego świata. Każdy projekt traktujemy indywidualnie, przykładamy ogromną wagę do szczegółów i nieustannie dążymy do innowacji, aby nasze produkcje były niepowtarzalne i zapadały w pamięć na długo. Wspieramy kulturę kreatywności i współpracy, a także stawiamy na transparentność wobec naszych graczy oraz partnerów. Pragniemy tworzyć gry, które nie tylko bawią, ale także budują społeczności i pozostawiają trwały ślad w sercach graczy.
+  </p>
+</section>
+
+<section id="blog">
+  <h2>Blog</h2>
+  <p class="long-text">
+    Zapraszamy do śledzenia naszego bloga, gdzie regularnie dzielimy się najświeższymi informacjami na temat naszych nadchodzących tytułów, aktualizacji oraz ciekawostek ze świata Mythbound Studios. Znajdziesz tutaj ekskluzywne zapowiedzi, wywiady z twórcami oraz kulisy powstawania gier – od pierwszych szkiców i konceptów, przez proces produkcji, aż po ostateczne testy i premierę. Dzielimy się także inspiracjami, technologiami, które wykorzystujemy, oraz trendami branżowymi, które mają wpływ na rozwój naszych projektów. Blog to także miejsce, gdzie możesz poznać historie naszych zespołów, przeczytać opinie i recenzje od innych graczy oraz brać udział w konkursach i wydarzeniach organizowanych specjalnie dla fanów Mythbound Studios. Chcemy, abyś czuł się częścią naszej społeczności i na bieżąco uczestniczył w naszej wspólnej przygodzie.
+  </p>
+</section>
+
+<section id="team">
+  <h2>Zespół</h2>
+  <p class="long-text">
+    Poznaj niezwykły zespół Mythbound Studios – grupę utalentowanych i zaangażowanych profesjonalistów, którzy każdego dnia wkładają serce i wiedzę w tworzenie naszych gier. Nasz team składa się z doświadczonych programistów, którzy nieustannie optymalizują kod i implementują nowoczesne rozwiązania technologiczne; kreatywnych grafików, którzy odpowiadają za zachwycającą oprawę wizualną, projektowanie postaci i światów pełnych detali; projektantów dźwięku i kompozytorów tworzących unikalną atmosferę poprzez muzykę i efekty audio; a także designerów zajmujących się mechaniką rozgrywki i doświadczeniem użytkownika. Współpracujemy także z ekspertami od marketingu, PR oraz community managementu, którzy pomagają nam budować silną i zaangażowaną społeczność graczy. Każdy członek zespołu wnosi unikalne umiejętności, pasję i kreatywność, co pozwala nam razem realizować ambitne projekty i stawiać nowe wyzwania przed branżą.
+  </p>
+</section>
+
+<section id="career">
+  <h2>Kariera</h2>
+  <p class="long-text">
+    Myślisz o karierze w branży gier wideo? Mythbound Studios to idealne miejsce dla osób, które chcą rozwijać swoje talenty i zdobywać doświadczenie w dynamicznym i twórczym środowisku. Regularnie poszukujemy nowych, utalentowanych specjalistów na różne stanowiska – od programistów, przez grafików, projektantów poziomów, aż po specjalistów ds. marketingu i komunikacji. Oferujemy staże oraz praktyki, które umożliwiają zdobycie praktycznych umiejętności oraz poznanie kulis pracy w profesjonalnym studiu. Proces rekrutacji u nas jest przejrzysty i przyjazny – zależy nam na tym, by każda osoba czuła się komfortowo i miała możliwość pokazania swojego potencjału. Jeśli chcesz dołączyć do Mythbound Studios, sprawdź aktualne oferty pracy na naszej stronie, przygotuj swoje portfolio oraz CV, a my zadbamy o to, byś mógł rozwijać się w przyjaznej i inspirującej atmosferze.
+  </p>
+</section>
+
+<section id="partners">
+  <h2>Partnerzy</h2>
+  <p class="long-text">
+    W Mythbound Studios współpracujemy z szerokim gronem partnerów z różnych sektorów branży technologicznej i rozrywkowej, którzy wspierają nas w realizacji ambitnych projektów. Nasi partnerzy to zarówno uznane firmy deweloperskie, wydawcy gier, jak i dostawcy nowoczesnych rozwiązań technologicznych, a także agencje marketingowe i PR. Razem tworzymy kompleksowe strategie promocji i dystrybucji, które pozwalają naszym tytułom dotrzeć do szerokiego grona odbiorców na całym świecie. Współpraca ta opiera się na zaufaniu, profesjonalizmie i wspólnym dążeniu do najwyższej jakości produktów. Dzięki partnerstwom możemy korzystać z najnowszych narzędzi, technologii i wiedzy, co przekłada się na sukces naszych gier oraz zadowolenie graczy.
+  </p>
+</section>
+
+<section id="kontakt">
+  <h2>Kontakt</h2>
+  <p class="long-text">
+    Jesteśmy do Twojej dyspozycji! Jeśli masz pytania dotyczące naszych gier, potrzebujesz wsparcia technicznego lub chcesz nawiązać współpracę, skontaktuj się z nami za pomocą formularza kontaktowego dostępnego na stronie, wysyłając e-mail na adres kontakt@mythboundstudios.com lub poprzez nasze profile w mediach społecznościowych. Nasz zespół odpowiada na wiadomości w możliwie najkrótszym czasie, a każde zapytanie traktujemy poważnie i z należytą uwagą. Zachęcamy także do dołączenia do naszej społeczności na platformach takich jak Facebook, Twitter czy Discord, gdzie możesz na bieżąco śledzić aktualności i wymieniać się opiniami z innymi fanami naszych produkcji.
+  </p>
+</section>
+
+<section id="support">
+  <h2>Wsparcie</h2>
+  <p class="long-text">
+    W Mythbound Studios wiemy, jak ważne jest szybkie i skuteczne wsparcie dla naszych graczy. Nasz dział wsparcia technicznego jest do Twojej dyspozycji, aby pomóc w rozwiązywaniu wszelkich problemów związanych z instalacją, aktualizacjami, błędami w grach oraz pytaniami dotyczącymi konta czy płatności. Oferujemy szeroki zakres pomocy – od szczegółowych poradników i FAQ, przez indywidualną pomoc e-mailową, aż po aktywne wsparcie na forach i w mediach społecznościowych. Dokładamy wszelkich starań, aby odpowiedzi były szybkie i rzetelne, a Ty mógł jak najszybciej wrócić do gry i cieszyć się pełnią wrażeń.
+  </p>
+</section>
+
+<section id="polityka">
+  <h2>Polityka Prywatności</h2>
+  <p class="long-text">
+    Twoja prywatność jest dla nas priorytetem. W Mythbound Studios dokładamy wszelkich starań, aby chronić Twoje dane osobowe i zapewnić pełną przejrzystość w zakresie ich przetwarzania. Na naszej stronie znajdziesz szczegółową politykę prywatności, która wyjaśnia, jakie informacje zbieramy, w jakim celu oraz jak je zabezpieczamy. Informujemy także o Twoich prawach związanych z ochroną danych, w tym o możliwości ich poprawiania, usuwania czy ograniczania przetwarzania. Stosujemy zaawansowane środki techniczne i organizacyjne, aby zapobiegać nieautoryzowanemu dostępowi, utracie lub zmianie danych. Zachęcamy do zapoznania się z dokumentem i kontaktu z nami w przypadku pytań lub wątpliwości.
+  </p>
+</section>
+
+
+<script>
+  document.querySelector('footer p').innerHTML = "&copy; " + new Date().getFullYear() + " Mythbound Studios. Wszelkie prawa zastrzeżone.";
+
+  function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+  function contactAlert() { alert("Dziękujemy za kontakt! Odpowiemy w ciągu 24h."); }
+
+  window.addEventListener('scroll', function() {
+    if(window.scrollY > 50) { document.querySelector('header').style.background = '#333'; }
+    else { document.querySelector('header').style.background = '#111'; }
+  });
+
+  function toggleMenu() {
+    var nav = document.querySelector('nav');
+    if(nav.style.display === "block") { nav.style.display = "none"; }
+    else { nav.style.display = "block"; }
+  }
+</script>  

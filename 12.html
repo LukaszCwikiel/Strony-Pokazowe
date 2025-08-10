@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Studio Fryzur NOVA — Nowoczesne Salon (HTML5/CSS3/JS)</title>
+  <meta name="description" content="Studio Fryzur NOVA — nowoczesne usługi fryzjerskie. Rezerwacje, galeria, cennik i kontakt." />
+  <meta name="theme-color" content="#ff6fa3">
+  <style>
+    /* ========= 2026 modern CSS (single-file): variables, responsive, accessibility ========= */
+    :root{
+      --bg:#fbfbfc;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --brand:#ff6fa3;
+      --glass: rgba(255,255,255,0.6);
+      --radius:18px;
+      --max:1200px;
+      --shadow: 0 8px 24px rgba(16,24,40,0.08);
+      --ff-sans: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    @media (prefers-color-scheme: dark){
+      :root{ --bg: #0b0b0c; --card: #0f1720; --muted: #9ca3af; --glass: rgba(15,23,32,0.6); }
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:var(--ff-sans); background:linear-gradient(180deg,var(--bg), #f7f7f9); color: #0f1720; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+    }
+
+    .container{max-width:var(--max);margin:0 auto;padding:28px}
+
+    /* header */
+    header{position:sticky;top:12px;z-index:40;padding:10px 0;backdrop-filter: blur(6px);}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:54px;height:54px;border-radius:14px;background:linear-gradient(135deg,var(--brand),#ffb3d1);display:grid;place-items:center;color:white;font-weight:700;box-shadow:var(--shadow)}
+    nav a{margin:0 8px;color:var(--muted);text-decoration:none;font-weight:600}
+    .actions{display:flex;gap:10px;align-items:center}
+    .btn{background:var(--brand);color:white;padding:10px 16px;border-radius:12px;border:0;font-weight:700;cursor:pointer}
+    .ghost{background:transparent;border-radius:12px;padding:8px 12px;border:1px solid rgba(0,0,0,0.06)}
+
+    /* hero */
+    .hero{display:grid;grid-template-columns:1fr;gap:20px;align-items:center;padding:30px 0}
+    .hero-inner{display:flex;flex-direction:column;gap:18px}
+    .kicker{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,111,163,0.12);color:var(--brand);font-weight:700;font-size:13px}
+    h1{font-size:clamp(28px,4vw,44px);margin:0;line-height:1.02}
+    p.lead{margin:0;color:var(--muted);max-width:60ch}
+
+    .hero-media{border-radius:26px;overflow:hidden;box-shadow:var(--shadow);min-height:260px}
+    .hero-media img{width:100%;height:100%;object-fit:cover;display:block}
+
+    /* grid blocks */
+    .grid{display:grid;gap:18px}
+    .cols-3{grid-template-columns:repeat(3,1fr)}
+    .card{background:var(--card);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+
+    /* services */
+    .services{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+    .service-title{font-weight:800}
+    .price{color:var(--brand);font-weight:800}
+
+    /* gallery carousel (simple) */
+    .carousel{display:flex;gap:12px;overflow:auto;padding-bottom:6px;scroll-snap-type:x mandatory}
+    .slide{min-width:260px;scroll-snap-align:start;border-radius:14px;overflow:hidden;background:#efefef}
+    .slide img{display:block;width:100%;height:190px;object-fit:cover}
+
+    /* team */
+    .team{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+    .avatar{width:84px;height:84px;border-radius:999px;overflow:hidden}
+
+    /* contact */
+    .contact-grid{display:grid;grid-template-columns:1fr;gap:14px}
+    .muted{color:var(--muted)}
+
+    footer{margin-top:30px;color:var(--muted);font-size:13px;padding:24px 0}
+
+    /* modal */
+    .modal-backdrop{position:fixed;inset:0;background:linear-gradient(180deg,rgba(2,6,23,0.45),rgba(2,6,23,0.55));display:grid;place-items:center;padding:20px}
+    .modal{max-width:720px;width:100%;background:var(--card);border-radius:20px;padding:18px}
+
+    /* small tweaks */
+    .flex{display:flex}
+    .center{align-items:center}
+    .between{justify-content:space-between}
+
+    /* accessibility focus */
+    a:focus,button:focus,input:focus,textarea:focus{outline:3px solid rgba(255,111,163,0.18);outline-offset:3px}
+
+    @media(min-width:900px){
+      .hero{grid-template-columns:1fr 1fr;align-items:center}
+      .hero-media{min-height:360px}
+    }
+  </style>
+</head>
+<body>
+  <header class="container">
+    <div class="nav" role="navigation" aria-label="Główne menu">
+      <div class="brand">
+        <div class="logo" aria-hidden>SN</div>
+        <div>
+          <div style="font-weight:800">Studio Fryzur <span style="color:var(--brand)">NOVA</span></div>
+          <div class="muted" style="font-size:13px">Nowoczesne techniki • Zrównoważone produkty</div>
+        </div>
+      </div>
+
+      <nav aria-label="Sekcje strony" class="muted" style="display:none;" id="desktopNav">
+        <a href="#uslugi">Usługi</a>
+        <a href="#galeria">Galeria</a>
+        <a href="#team">Zespół</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+
+      <div class="actions">
+        <button class="ghost" id="menuToggle" aria-expanded="false" aria-controls="mobileMenu">Menu</button>
+        <button class="btn" id="bookBtn">Umów się</button>
+      </div>
+    </div>
+
+    <!-- mobile menu -->
+    <div id="mobileMenu" style="display:none;margin-top:12px;" aria-hidden="true">
+      <nav>
+        <a href="#uslugi">Usługi</a> · <a href="#galeria">Galeria</a> · <a href="#team">Zespół</a> · <a href="#kontakt">Kontakt</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero" aria-labelledby="heroTitle">
+      <div class="hero-inner">
+        <span class="kicker">Nowość 2026</span>
+        <h1 id="heroTitle">Studio Fryzur <span style="color:var(--brand)">NOVA</span><br><small style="font-weight:600;color:var(--muted);font-size:16px">Personalizacja, zrównoważony wybór i doświadczenie premium</small></h1>
+        <p class="lead">Tworzymy fryzury, które pasują do Twojego stylu życia. Oferujemy konsultacje + propozycję stylizacji, naturalne i wegańskie produkty oraz relaksującą strefę salonu. Zarezerwuj wizytę online lub odwiedź nas na miejscu.</p>
+
+        <div class="flex" style="gap:12px">
+          <button class="btn" id="ctaBook">Zarezerwuj wizytę</button>
+          <a class="ghost" href="#galeria">Zobacz galerię</a>
+        </div>
+
+        <ul style="margin-top:12px;color:var(--muted);display:flex;gap:16px;font-size:14px;flex-wrap:wrap">
+          <li>✦ Konsultacja AI + stylista</li>
+          <li>✦ Wegańskie produkty</li>
+          <li>✦ Strefa relaksu</li>
+        </ul>
+      </div>
+
+      <div class="hero-media" aria-hidden="true">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1400&auto=format&fit=crop&s=placeholder" alt="Wnętrze salonu - poglądowe zdjęcie">
+      </div>
+    </section>
+
+    <!-- services -->
+    <section id="uslugi" style="margin-top:28px">
+      <div class="flex between" style="align-items:flex-end">
+        <h2 style="margin:0">Nasze usługi</h2>
+        <div class="muted">Pakiety dopasowane do potrzeb</div>
+      </div>
+
+      <div class="services" style="margin-top:12px">
+        <article class="card" aria-labelledby="s1">
+          <div id="s1" class="service-title">Strzyżenie</div>
+          <p class="muted">Krój dopasowany do kształtu twarzy i stylu życia</p>
+          <div style="margin-top:14px" class="flex between"><div class="price">od 80 zł</div><button class="ghost" data-service="Strzyżenie">Umów</button></div>
+        </article>
+
+        <article class="card">
+          <div class="service-title">Koloryzacja</div>
+          <p class="muted">Pełne farbowanie, balejaż, ombre</p>
+          <div style="margin-top:14px" class="flex between"><div class="price">od 220 zł</div><button class="ghost" data-service="Koloryzacja">Umów</button></div>
+        </article>
+
+        <article class="card">
+          <div class="service-title">Stylizacje okolicznościowe</div>
+          <p class="muted">Fryzury wieczorowe i ślubne</p>
+          <div style="margin-top:14px" class="flex between"><div class="price">od 150 zł</div><button class="ghost" data-service="Stylizacja">Umów</button></div>
+        </article>
+
+        <article class="card">
+          <div class="service-title">Kuracje regenerujące</div>
+          <p class="muted">Maski, zabiegi keratynowe</p>
+          <div style="margin-top:14px" class="flex between"><div class="price">od 120 zł</div><button class="ghost" data-service="Kuracje">Umów</button></div>
+        </article>
+
+        <article class="card">
+          <div class="service-title">Konsultacja stylizacyjna</div>
+          <p class="muted">Analiza włosów + propozycja stylizacji</p>
+          <div style="margin-top:14px" class="flex between"><div class="price">50 zł</div><button class="ghost" data-service="Konsultacja">Umów</button></div>
+        </article>
+
+        <article class="card">
+          <div class="service-title">Usługi barberskie</div>
+          <p class="muted">Strzyżenie i stylizacja brody</p>
+          <div style="margin-top:14px" class="flex between"><div class="price">od 60 zł</div><button class="ghost" data-service="Barber">Umów</button></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- gallery -->
+    <section id="galeria" style="margin-top:28px">
+      <h2>Galeria</h2>
+      <p class="muted">Przykłady naszych prac — przesuń, aby zobaczyć więcej</p>
+
+      <div class="carousel" style="margin-top:12px">
+        <div class="slide"><img loading="lazy" alt="Praca 1" src="https://images.unsplash.com/photo-1534081333815-ae5019106622?q=80&w=1200&auto=format&fit=crop&s=placeholder-1"><div style="padding:8px">Przemiana 1 — Krój + koloryzacja</div></div>
+        <div class="slide"><img loading="lazy" alt="Praca 2" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1200&auto=format&fit=crop&s=placeholder-2"><div style="padding:8px">Przemiana 2 — Balayage</div></div>
+        <div class="slide"><img loading="lazy" alt="Praca 3" src="https://images.unsplash.com/photo-1520975911998-5c0ff6ae3b18?q=80&w=1200&auto=format&fit=crop&s=placeholder-3"><div style="padding:8px">Przemiana 3 — Stylizacja wieczorowa</div></div>
+        <div class="slide"><img loading="lazy" alt="Praca 4" src="https://images.unsplash.com/photo-1519744792095-2f2205e87b6f?q=80&w=1200&auto=format&fit=crop&s=placeholder-4"><div style="padding:8px">Przemiana 4 — Krótki bob</div></div>
+      </div>
+    </section>
+
+    <!-- team -->
+    <section id="team" style="margin-top:28px">
+      <h2>Poznaj zespół</h2>
+      <div class="team" style="margin-top:12px">
+        <div class="card" style="text-align:center">
+          <div class="avatar" style="margin:0 auto"><img alt="Agnieszka" src="https://i.pravatar.cc/150?u=agnieszka"/></div>
+          <div style="margin-top:10px;font-weight:800">Agnieszka</div>
+          <div class="muted">Stylistka</div>
+          <div style="margin-top:10px"><button class="ghost">Zarezerwuj</button></div>
+        </div>
+
+        <div class="card" style="text-align:center">
+          <div class="avatar" style="margin:0 auto"><img alt="Marek" src="https://i.pravatar.cc/150?u=marek"/></div>
+          <div style="margin-top:10px;font-weight:800">Marek</div>
+          <div class="muted">Barber</div>
+          <div style="margin-top:10px"><button class="ghost">Zarezerwuj</button></div>
+        </div>
+
+        <div class="card" style="text-align:center">
+          <div class="avatar" style="margin:0 auto"><img alt="Sylwia" src="https://i.pravatar.cc/150?u=sylwia"/></div>
+          <div style="margin-top:10px;font-weight:800">Sylwia</div>
+          <div class="muted">Koloryzacja</div>
+          <div style="margin-top:10px"><button class="ghost">Zarezerwuj</button></div>
+        </div>
+
+        <div class="card" style="text-align:center">
+          <div class="avatar" style="margin:0 auto"><img alt="Kuba" src="https://i.pravatar.cc/150?u=kuba"/></div>
+          <div style="margin-top:10px;font-weight:800">Kuba</div>
+          <div class="muted">Stylista</div>
+          <div style="margin-top:10px"><button class="ghost">Zarezerwuj</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- contact -->
+    <section id="kontakt" style="margin-top:28px">
+      <h2>Kontakt</h2>
+      <div class="contact-grid" style="margin-top:12px">
+        <div class="card">
+          <div style="font-weight:800">Studio NOVA</div>
+          <div class="muted" style="margin-top:6px">ul. Przykładowa 12, 00-001 Warszawa</div>
+          <div style="margin-top:12px">
+            <div class="muted">Telefon</div>
+            <a href="tel:+48123456789">+48 123 456 789</a>
+          </div>
+          <div style="margin-top:10px">
+            <div class="muted">E‑mail</div>
+            <a href="mailto:kontakt@studionova.pl">kontakt@studionova.pl</a>
+          </div>
+
+          <div style="margin-top:12px">
+            <div class="muted">Godziny otwarcia</div>
+            <div class="muted">Pn–Pt: 10:00–19:00 • Sob: 9:00–15:00 • Nd: zamknięte</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <form id="contactForm" aria-label="Formularz kontaktowy">
+            <label class="muted" for="name">Imię</label>
+            <input id="name" name="name" required placeholder="Twoje imię" style="width:100%;padding:10px;border-radius:10px;margin-top:6px;border:1px solid rgba(0,0,0,0.06)" />
+
+            <label class="muted" for="email" style="margin-top:10px;display:block">E‑mail</label>
+            <input id="email" name="email" type="email" required placeholder="adres@przykład.pl" style="width:100%;padding:10px;border-radius:10px;margin-top:6px;border:1px solid rgba(0,0,0,0.06)" />
+
+            <label class="muted" for="msg" style="margin-top:10px;display:block">Wiadomość</label>
+            <textarea id="msg" name="message" rows="4" placeholder="Napisz wiadomość" style="width:100%;padding:10px;border-radius:10px;margin-top:6px;border:1px solid rgba(0,0,0,0.06)"></textarea>
+
+            <div style="margin-top:12px;display:flex;gap:8px;justify-content:flex-end">
+              <button type="reset" class="ghost">Wyczyść</button>
+              <button type="submit" class="btn">Wyślij</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer style="margin-top:30px">
+      <div class="muted">© Studio Fryzur NOVA — Wszystkie prawa zastrzeżone • Projekt 2026</div>
+    </footer>
+  </main>
+
+  <!-- booking modal (progressive enhancement) -->
+  <template id="modalTpl">
+    <div class="modal-backdrop" role="dialog" aria-modal="true">
+      <div class="modal" role="document">
+        <div style="display:flex;justify-content:space-between;align-items:center"><h3 style="margin:0">Rezerwacja wizyty</h3><button id="closeModal" aria-label="Zamknij">✕</button></div>
+        <p class="muted">Wypełnij formularz lub zadzwoń: <a href="tel:+48123456789">+48 123 456 789</a></p>
+
+        <form id="bookingForm" style="margin-top:12px">
+          <label class="muted">Imię</label>
+          <input name="name" required style="width:100%;padding:10px;border-radius:10px;margin-top:6px;border:1px solid rgba(0,0,0,0.06)" />
+
+          <label class="muted" style="margin-top:10px;display:block">Telefon</label>
+          <input name="phone" required placeholder="np. +48 600 700 800" style="width:100%;padding:10px;border-radius:10px;margin-top:6px;border:1px solid rgba(0,0,0,0.06)" />
+
+          <label class="muted" style="margin-top:10px;display:block">Wybierz usługę</label>
+          <select name="service" style="width:100%;padding:10px;border-radius:10px;margin-top:6px;border:1px solid rgba(0,0,0,0.06)">
+            <option>Strzyżenie</option>
+            <option>Koloryzacja</option>
+            <option>Stylizacja</option>
+            <option>Konsultacja</option>
+          </select>
+
+          <label class="muted" style="margin-top:10px;display:block">Data</label>
+          <input name="date" type="date" style="width:100%;padding:10px;border-radius:10px;margin-top:6px;border:1px solid rgba(0,0,0,0.06)" />
+
+          <div style="margin-top:12px;display:flex;gap:8px;justify-content:flex-end">
+            <button type="button" id="cancelModal" class="ghost">Anuluj</button>
+            <button type="submit" class="btn">Zarezerwuj</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    // Progressive, dependency-free JS: interactivity + small UX touches
+    (function(){
+      const menuToggle = document.getElementById('menuToggle');
+      const mobileMenu = document.getElementById('mobileMenu');
+      const desktopNav = document.getElementById('desktopNav');
+      const bookBtn = document.getElementById('bookBtn');
+      const ctaBook = document.getElementById('ctaBook');
+
+      // show desktop nav if wide
+      function adaptNav(){
+        if(window.innerWidth >= 900){ desktopNav.style.display='block'; mobileMenu.style.display='none'; menuToggle.setAttribute('aria-expanded','false'); }
+        else{ desktopNav.style.display='none'; }
+      }
+      adaptNav(); window.addEventListener('resize', adaptNav);
+
+      menuToggle.addEventListener('click', ()=>{
+        const open = mobileMenu.style.display === 'block';
+        mobileMenu.style.display = open ? 'none' : 'block';
+        menuToggle.setAttribute('aria-expanded', String(!open));
+      });
+
+      // Modal helpers
+      function openModal(){
+        const tpl = document.getElementById('modalTpl');
+        const node = tpl.content.cloneNode(true);
+        document.body.appendChild(node);
+        const backdrop = document.querySelector('.modal-backdrop');
+        backdrop.querySelector('#closeModal').addEventListener('click', closeModal);
+        backdrop.querySelector('#cancelModal').addEventListener('click', closeModal);
+        backdrop.querySelector('#bookingForm').addEventListener('submit', function(e){
+          e.preventDefault();
+          // lightweight client-side validation already handled by required; show success toast
+          closeModal();
+          showToast('Dziękujemy — wstępna rezerwacja wysłana. Potwierdzimy telefonicznie.');
+        });
+        document.addEventListener('keydown', escClose);
+        function escClose(e){ if(e.key === 'Escape') closeModal(); }
+        function closeModal(){
+          const b = document.querySelector('.modal-backdrop');
+          if(b) b.remove();
+          document.removeEventListener('keydown', escClose);
+        }
+      }
+      bookBtn.addEventListener('click', openModal);
+      ctaBook.addEventListener('click', openModal);
+
+      // Service 'Umów' buttons open modal and prefill service
+      document.querySelectorAll('[data-service]').forEach(btn=>{
+        btn.addEventListener('click', (e)=>{
+          openModal();
+          // wait for DOM then set select
+          setTimeout(()=>{
+            const sel = document.querySelector('.modal-backdrop select');
+            if(sel) sel.value = btn.getAttribute('data-service');
+          },80);
+        });
+      });
+
+      // lightweight toast
+      function showToast(text){
+        const t = document.createElement('div');
+        t.textContent = text; t.style.position='fixed'; t.style.right='20px'; t.style.bottom='20px'; t.style.padding='12px 16px'; t.style.background='rgba(15,23,40,0.9)'; t.style.color='white'; t.style.borderRadius='12px'; t.style.boxShadow='var(--shadow)'; t.style.zIndex=9999; document.body.appendChild(t);
+        setTimeout(()=>{ t.style.transition='opacity .4s'; t.style.opacity='0'; setTimeout(()=>t.remove(),420); },3000);
+      }
+
+      // contact form simple handler
+      document.getElementById('contactForm').addEventListener('submit', function(e){
+        e.preventDefault();
+        showToast('Dziękujemy — wiadomość wysłana.');
+        this.reset();
+      });
+
+      // small accessibility: prefers-reduced-motion
+      if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+        // avoid animations (we used none heavy), but could disable CSS transitions if set
+      }
+
+      // keyboard-friendly carousel: allow arrow keys to scroll gallery when focused
+      const carousel = document.querySelector('.carousel');
+      if(carousel){
+        carousel.tabIndex = 0;
+        carousel.addEventListener('keydown', (e)=>{
+          if(e.key === 'ArrowRight') carousel.scrollBy({left:260,behavior:'smooth'});
+          if(e.key === 'ArrowLeft') carousel.scrollBy({left:-260,behavior:'smooth'});
+        });
+      }
+
+      // small progressive enhancement: lazy-load polyfill fallback
+      if('loading' in HTMLImageElement.prototype === false){
+        // basic lazy-load for older browsers
+        const imgs = document.querySelectorAll('img[loading="lazy"]');
+        imgs.forEach(img=>{
+          const io = new IntersectionObserver(entries => entries.forEach(entry => {
+            if(entry.isIntersecting){ img.src = img.getAttribute('src'); io.unobserve(entry.target); }
+          }));
+          io.observe(img);
+        });
+      }
+
+    })();
+  </script>
+</body>
+</html>

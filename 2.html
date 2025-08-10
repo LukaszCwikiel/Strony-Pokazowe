@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>EcoTech Energy — Zielona energia premium</title>
+<meta name="description" content="EcoTech Energy — kompleksowe rozwiązania OZE: panele, turbiny, magazyny energii. Projekt, montaż, serwis i monitoring.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+<!-- OPTIONAL: GSAP CDN for nicer animations (keeps file single, loads externally) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+
+<style>
+  :root{
+    --bg:#f4fbfa;
+    --card:#ffffff;
+    --accent:#00796b;
+    --accent-2:#00bfa5;
+    --muted:#6b7c7a;
+    --glass: rgba(255,255,255,0.7);
+    --radius: 14px;
+    --maxw:1200px;
+  }
+
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: radial-gradient(1200px 600px at 10% 10%, #e8fbf9 0%, transparent 10%), linear-gradient(180deg,#f7fffe 0%, var(--bg) 100%);
+    color:#08332f;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    overflow-y:scroll;
+    line-height:1.45;
+  }
+
+  /* Container */
+  .container{max-width:var(--maxw);margin:0 auto;padding:2rem;}
+
+/* ---------- Header ---------- */
+  header.site-header{
+    position:sticky;top:12px;z-index:1400;
+    background:linear-gradient(180deg, rgba(255,255,255,0.7), rgba(255,255,255,0.4));
+    backdrop-filter: blur(6px);
+    border-radius:16px;
+    margin:0.75rem; box-shadow:0 8px 30px rgba(3,40,36,0.08);
+    display:flex;align-items:center;justify-content:space-between;padding:0.5rem 1rem;
+  }
+  .brand{display:flex;gap:0.9rem;align-items:center}
+  .logo{
+    width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent-2),var(--accent));
+    display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:1.05rem;box-shadow:0 6px 18px rgba(0,0,0,0.12);
+    user-select:none;
+  }
+  .brand h1{font-size:1.05rem;margin:0;letter-spacing:0.6px;color:var(--accent);font-weight:700}
+  nav.main-nav{display:flex;gap:0.5rem;align-items:center}
+  nav.main-nav a{color:var(--muted);text-decoration:none;padding:0.5rem 0.9rem;border-radius:10px;font-weight:600;transition:all .25s;display:inline-block}
+  nav.main-nav a:hover, nav.main-nav a.active{color:var(--accent);background:rgba(0,121,107,0.06);transform:translateY(-2px)}
+  .actions{display:flex;gap:0.5rem;align-items:center}
+  .action-btn{background:transparent;border:1px solid rgba(6,42,38,0.06);padding:0.5rem 0.9rem;border-radius:999px;font-weight:700;cursor:pointer}
+  .icon{width:20px;height:20px;display:inline-block;vertical-align:middle}
+  /* mobile */
+  .menu-toggle{display:none;background:transparent;border:0;padding:0.5rem;border-radius:8px;cursor:pointer}
+  @media (max-width:880px){
+    nav.main-nav{display:none}
+    .menu-toggle{display:inline-flex}
+  }
+
+/* ---------- Hero / CTA ---------- */
+  .hero{
+    margin:1.25rem 0 2rem;
+    border-radius:18px;padding:2.25rem;display:grid;grid-template-columns:1fr 420px;gap:1.25rem;align-items:center;
+    background:linear-gradient(180deg, rgba(0,121,107,0.03), rgba(0,191,165,0.02));
+    box-shadow:0 18px 50px rgba(6,38,36,0.06);
+    overflow:hidden;position:relative;
+  }
+  .hero:before{
+    content:"";position:absolute;right:-120px;top:-60px;width:520px;height:520px;border-radius:50%;background:linear-gradient(135deg, rgba(0,191,165,0.12), rgba(0,121,107,0.06));
+    transform:rotate(20deg);filter:blur(20px);pointer-events:none;
+  }
+  .hero h2{font-size:2.25rem;margin:0 0 0.5rem;color:var(--accent)}
+  .hero p{color:#2a4d4a;margin-bottom:1rem}
+  .hero .kills{
+    display:flex;gap:0.75rem;margin-top:12px;flex-wrap:wrap;
+  }
+  .pill{background:linear-gradient(90deg,#e6fffb,#f1fff9);border-radius:999px;padding:0.45rem 0.8rem;font-weight:700;color:var(--accent);box-shadow:0 6px 12px rgba(0,121,107,0.06)}
+  .hero .cta-actions{margin-top:1.25rem;display:flex;gap:0.75rem;align-items:center}
+  .btn-primary{
+    background:linear-gradient(180deg,var(--accent-2),var(--accent));border:0;padding:0.75rem 1.4rem;border-radius:999px;color:white;font-weight:800;cursor:pointer;box-shadow:0 12px 30px rgba(0,121,107,0.18);
+    transition:transform .18s, box-shadow .18s;
+  }
+  .btn-primary:hover{transform:translateY(-4px);box-shadow:0 22px 44px rgba(0,77,64,0.16)}
+  .btn-ghost{background:transparent;border:1px solid rgba(3,40,36,0.06);padding:0.6rem 1rem;border-radius:999px;font-weight:700;cursor:pointer}
+
+  /* hero right card */
+  .hero-card{background:linear-gradient(180deg,#fff, #fbfffe);border-radius:12px;padding:1rem;box-shadow:0 10px 30px rgba(6,38,36,0.06)}
+  .hero-card h4{margin:0;font-size:1rem;color:var(--accent);font-weight:800}
+  .specs{display:grid;grid-template-columns:repeat(2,1fr);gap:0.5rem;margin-top:0.9rem}
+  .spec{background:linear-gradient(180deg,#f7fffd,#ffffff);padding:0.6rem;border-radius:10px;text-align:center;font-weight:700;color:#064d46;box-shadow:inset 0 -6px 12px rgba(0,0,0,0.02)}
+  .price-small{font-size:1.2rem}
+
+/* ---------- Stats ---------- */
+  .stats{display:flex;gap:1rem;justify-content:space-between;margin:2rem 0;flex-wrap:wrap}
+  .stat{flex:1;min-width:180px;background:linear-gradient(180deg,#ffffff,#fbfffe);padding:1rem;border-radius:12px;box-shadow:0 10px 28px rgba(6,38,36,0.05);text-align:center}
+  .stat h3{font-size:1.6rem;margin:0;color:var(--accent);font-weight:800}
+  .stat p{color:var(--muted);margin-top:0.4rem;font-weight:700}
+
+/* ---------- Products grid ---------- */
+  .section-title{font-size:1.45rem;color:var(--accent);font-weight:800;margin:1.5rem 0;letter-spacing:0.6px}
+  .products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.5rem}
+  .card{background:var(--card);border-radius:12px;padding:0;overflow:hidden;border:1px solid rgba(6,38,36,0.03);transition:transform .28s, box-shadow .28s;display:flex;flex-direction:column}
+  .card:hover{transform:translateY(-10px);box-shadow:0 26px 50px rgba(6,38,36,0.08)}
+  .card img{width:100%;height:180px;object-fit:cover;display:block}
+  .card-body{padding:1rem;flex:1;display:flex;flex-direction:column}
+  .card h3{margin:0;color:#093733;font-weight:800}
+  .card p{color:var(--muted);margin-top:0.6rem;flex:1}
+  .card .card-foot{display:flex;justify-content:space-between;align-items:center;margin-top:1rem}
+  .tag{padding:0.35rem 0.6rem;background:rgba(0,191,165,0.08);border-radius:999px;font-weight:800;color:var(--accent)}
+
+/* ---------- Case studies / blog ---------- */
+  .two-grid{display:grid;grid-template-columns:2fr 1fr;gap:1rem;align-items:start}
+  .case-list, .blog-list{display:grid;gap:1rem}
+
+/* ---------- Testimonials carousel (vanilla) ---------- */
+  .testimonials{background:linear-gradient(180deg,#fbfffe,#f4fffd);padding:1rem;border-radius:12px;box-shadow:0 10px 30px rgba(6,38,36,0.04)}
+  .carousel{display:flex;gap:1rem;overflow:hidden}
+  .testimonial{min-width:320px;background:white;border-radius:12px;padding:1rem;box-shadow:0 8px 20px rgba(6,38,36,0.05);transform-origin:center;transition:transform .28s}
+  .testimonial p{color:#264a48;margin-top:0.6rem}
+  .avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--accent-2),var(--accent));color:white;display:inline-flex;align-items:center;justify-content:center;font-weight:800}
+
+/* ---------- Newsletter / Contact / Form ---------- */
+  .newsletter{display:flex;gap:0.75rem;align-items:center;padding:1rem;border-radius:12px;background:linear-gradient(90deg,#ffffff,#fbfffe);box-shadow:0 10px 30px rgba(6,38,36,0.04)}
+  .newsletter input{flex:1;padding:0.65rem 0.9rem;border-radius:10px;border:1px solid rgba(6,38,36,0.06);font-weight:600}
+  .form {background:linear-gradient(180deg,#fff,#fbfffe);padding:1rem;border-radius:12px;box-shadow:0 12px 36px rgba(6,38,36,0.06)}
+
+  label{display:block;font-weight:700;color:var(--accent);margin-bottom:0.35rem}
+  input[type="text"], input[type="email"], textarea{
+    width:100%;padding:0.75rem;border-radius:10px;border:1px solid rgba(6,38,36,0.06);margin-bottom:0.8rem;font-weight:600
+  }
+
+  .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:0.8rem}
+  .faq{display:grid;gap:0.6rem}
+  .faq-item{background:linear-gradient(180deg,#fff,#fcfffd);padding:0.75rem;border-radius:10px;border:1px solid rgba(6,38,36,0.03);cursor:pointer}
+  .faq-item h4{margin:0;display:flex;justify-content:space-between;align-items:center}
+  .faq-item p{margin-top:0.6rem;color:var(--muted);display:none}
+
+/* ---------- Map ---------- */
+  #map{width:100%;height:320px;border-radius:12px;box-shadow:0 10px 30px rgba(6,38,36,0.06);overflow:hidden}
+
+/* ---------- Footer ---------- */
+  footer{margin-top:2rem;padding:2rem;border-radius:12px;background:linear-gradient(180deg,#003b36,#002a24);color:#bff7ef}
+  footer .foot-grid{display:grid;grid-template-columns:1fr 300px;gap:1rem;align-items:start}
+  footer small{display:block;opacity:0.85;margin-top:1rem}
+
+/* ---------- Responsive ---------- */
+  @media (max-width:1100px){.products-grid{grid-template-columns:repeat(2,1fr)} .hero{grid-template-columns:1fr 340px}}
+  @media (max-width:760px){
+    .container{padding:1rem}
+    .hero{grid-template-columns:1fr;gap:1rem}
+    .two-grid{grid-template-columns:1fr}
+    .products-grid{grid-template-columns:1fr}
+    nav.main-nav{display:none}
+    .menu-toggle{display:inline-flex}
+    footer .foot-grid{grid-template-columns:1fr}
+  }
+
+/* ---------- micro interactions ---------- */
+  a:focus{outline:3px solid rgba(0,191,165,0.14);outline-offset:3px;border-radius:6px}
+  .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}
+</style>
+</head>
+<body>
+<header class="site-header container" id="top">
+  <div class="brand" aria-label="logo">
+    <div class="logo" aria-hidden="true">ET</div>
+    <div>
+      <h1>EcoTech Energy</h1>
+      <div style="font-size:12px;color:var(--muted);font-weight:700">Odnawialne źródła energii — Polska</div>
+    </div>
+  </div>
+
+  <nav class="main-nav" aria-label="Główne menu">
+    <a href="#top" class="nav-link active">Start</a>
+    <a href="#products" class="nav-link">Produkty</a>
+    <a href="#case-studies" class="nav-link">Case Studies</a>
+    <a href="#blog" class="nav-link">Blog</a>
+    <a href="#contact" class="nav-link">Kontakt</a>
+  </nav>
+
+  <div class="actions">
+    <button class="action-btn" id="darkToggle" title="Tryb ciemny / jasny">🌙</button>
+    <button class="action-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Kontakt</button>
+    <button class="menu-toggle" id="hamburger" aria-label="Otwórz menu">☰</button>
+  </div>
+</header>
+
+<main class="container" id="content">
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div>
+      <h2 id="hero-title">Zielona energia dla przyszłości — kompleksowo i lokalnie</h2>
+      <p>EcoTech Energy dostarcza skalowalne rozwiązania OZE: panele fotowoltaiczne, turbiny wiatrowe oraz magazyny energii — od projektu po serwis i monitoring. Optymalizujemy produkcję, redukujemy koszty i zwiększamy niezależność energetyczną.</p>
+
+      <div class="kills" role="list">
+        <div class="pill" role="listitem">Bezpłatne wyceny</div>
+        <div class="pill" role="listitem">Gwarancja do 25 lat</div>
+        <div class="pill" role="listitem">Monitoring 24/7</div>
+      </div>
+
+      <div class="cta-actions">
+        <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Zamów konsultację</button>
+        <button class="btn-ghost" onclick="openPricing()">Zobacz ofertę</button>
+      </div>
+
+      <!-- quick stats -->
+      <div class="stats" aria-hidden="true" style="margin-top:18px">
+        <div class="stat"><h3 class="counter" data-target="12000">0</h3><p>ton CO₂ zaoszczędzono</p></div>
+        <div class="stat"><h3 class="counter" data-target="5200">0</h3><p>zainstalowanych systemów</p></div>
+        <div class="stat"><h3 class="counter" data-target="98">0</h3><p>% zadowolonych klientów</p></div>
+      </div>
+    </div>
+
+    <aside class="hero-card" aria-label="Oferta szybka">
+      <h4>Pakiet startowy</h4>
+      <div class="specs" aria-hidden="true">
+        <div class="spec"><div style="font-size:18px" class="price-small">5 kW</div><div style="font-size:12px">typowa instalacja</div></div>
+        <div class="spec"><div style="font-size:18px">~4-6 lat</div><div style="font-size:12px">okres zwrotu</div></div>
+        <div class="spec"><div style="font-size:18px">Monitoring</div><div style="font-size:12px">aplikacja mobilna</div></div>
+        <div class="spec"><div style="font-size:18px">Gwarancja</div><div style="font-size:12px">do 25 lat</div></div>
+      </div>
+
+      <hr style="border:none;height:1px;background:linear-gradient(90deg,transparent,#e6fffb,transparent);margin:12px 0;border-radius:4px">
+
+      <div style="display:flex;gap:0.6rem;align-items:center;justify-content:space-between">
+        <div style="display:flex;gap:0.6rem;align-items:center">
+          <div class="avatar" aria-hidden="true">E</div>
+          <div style="font-weight:800">Doradztwo techniczne</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-weight:900;color:var(--accent);font-size:1.25rem">Darmowa</div>
+          <div style="font-size:12px;color:var(--muted)">wycena & analiza</div>
+        </div>
+      </div>
+    </aside>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section id="products" aria-labelledby="products-title">
+    <h2 id="products-title" class="section-title">Nasze produkty</h2>
+
+    <div class="products-grid" role="list">
+      <article class="card" role="article">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80" alt="Panele solarne">
+        <div class="card-body">
+          <h3>Panele fotowoltaiczne — monokrystaliczne</h3>
+          <p>Wysoka sprawność, minimalne straty przy częściowym zacienieniu oraz udokumentowana trwałość. Idealne do domów i firm.</p>
+          <div class="card-foot">
+            <div class="tag">Efektywność 21%</div>
+            <div><button class="btn-ghost" onclick="scrollToContact()">Poproś ofertę</button></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" role="article">
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=80" alt="Turbiny wiatrowe">
+        <div class="card-body">
+          <h3>Turbiny wiatrowe — mikro i średnie</h3>
+          <p>Rozwiązania przydomowe i farmowe, zoptymalizowane pod lokalne warunki wiatrowe i hałas.</p>
+          <div class="card-foot">
+            <div class="tag">Cicha praca</div>
+            <div><button class="btn-ghost" onclick="openWindCalc()">Analiza wiatru</button></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" role="article">
+        <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80" alt="Magazyn energii">
+        <div class="card-body">
+          <h3>Magazyny energii — baterie</h3>
+          <p>Zoptymalizuj zużycie energii, przechowuj nadwyżki i zabezpiecz dom przed przerwami w dostawie prądu.</p>
+          <div class="card-foot">
+            <div class="tag">Bezpieczeństwo</div>
+            <div><button class="btn-ghost" onclick="openStorage()">Dowiedz się więcej</button></div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- CASE STUDIES -->
+  <section id="case-studies" aria-labelledby="case-title">
+    <h2 id="case-title" class="section-title">Wybrane realizacje</h2>
+    <div class="two-grid">
+      <div class="case-list">
+        <article class="card">
+          <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1200&q=80" alt="Instalacja miejska">
+          <div class="card-body">
+            <h3>Instalacja PV — osiedle miejskie</h3>
+            <p>Modernizacja: 40% wzrost efektywności, program finansowania PPP, oszczędności w budżetach wspólnot.</p>
+            <div style="margin-top:8px"><button class="btn-ghost">Czytaj case study</button></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="https://images.unsplash.com/photo-1486308510493-cb89e39749b4?auto=format&fit=crop&w=1200&q=80" alt="Farma wiatrowa">
+          <div class="card-body">
+            <h3>Farma wiatrowa — 9 MW</h3>
+            <p>6 turbin, pełna niezależność energetyczna dla gminy, nowe miejsca pracy, rozbudowa o systemy magazynowania.</p>
+            <div style="margin-top:8px"><button class="btn-ghost">Czytaj case study</button></div>
+          </div>
+        </article>
+      </div>
+
+      <aside class="blog-list">
+        <div class="card form">
+          <h3 style="margin-top:0">Newsletter</h3>
+          <p style="margin:0.5rem 0 0.9rem;color:var(--muted)">Zapisz się i otrzymuj analizy, dopłaty i promocje.</p>
+          <div class="newsletter" role="form" aria-label="newsletter form">
+            <input id="nl-email" type="email" placeholder="Twój email" aria-label="Email newsletter">
+            <button class="btn-primary" onclick="subscribe()">Zapisz</button>
+          </div>
+        </div>
+
+        <div class="card form">
+          <h3 style="margin-top:0">FAQ — najczęściej pytane</h3>
+          <div class="faq" id="faq">
+            <div class="faq-item"><h4>Jak szybko zwraca się inwestycja?<span>+</span></h4><p>Średnio 4–8 lat w zależności od wielkości, dotacji i lokalnych taryf.</p></div>
+            <div class="faq-item"><h4>Czy instalacja wymaga pozwolenia?<span>+</span></h4><p>Drobne instalacje często nie — ale duże farmy wymagają pozwoleń. Pomagamy w formalnościach.</p></div>
+            <div class="faq-item"><h4>Jak długo trwa montaż?<span>+</span></h4><p>Standardowy montaż 1–5 dni roboczych dla domu jednorodzinnego; projekt i formalności trwają dłużej.</p></div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- BLOG -->
+  <section id="blog" aria-labelledby="blog-title">
+    <h2 id="blog-title" class="section-title">Blog edukacyjny</h2>
+    <div class="products-grid">
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1497493292307-31c376b6e479?auto=format&fit=crop&w=1200&q=80" alt="Korzyści energii słonecznej">
+        <div class="card-body">
+          <h3>Korzyści energii słonecznej</h3>
+          <p>Jak programy wsparcia i ulgi wpływają na opłacalność inwestycji? Praktyczne porady i symulacje.</p>
+          <div class="card-foot"><button class="btn-ghost">Czytaj</button></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1200&q=80" alt="Turbiny wiatrowe">
+        <div class="card-body">
+          <h3>Jak działają turbiny wiatrowe?</h3>
+          <p>Nauka w pigułce — aerodynamika, generatory i jak dobrać turbinę do lokalnych warunków.</p>
+          <div class="card-foot"><button class="btn-ghost">Czytaj</button></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80" alt="Magazyn energii">
+        <div class="card-body">
+          <h3>Magazyny energii — przyszłość sieci</h3>
+          <p>Rola akumulatorów w stabilizacji sieci i zwiększaniu autokonsumpcji energii odnawialnej.</p>
+          <div class="card-foot"><button class="btn-ghost">Czytaj</button></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section aria-labelledby="testi" style="margin-top:1rem">
+    <h2 id="testi" class="section-title">Opinie klientów</h2>
+    <div class="testimonials">
+      <div class="carousel" id="carousel" aria-live="polite">
+        <div class="testimonial">
+          <div style="display:flex;gap:0.6rem;align-items:center"><div class="avatar">AK</div><div><strong>Alicja K.</strong><div style="font-size:12px;color:var(--muted)">Właścicielka domu</div></div></div>
+          <p>"Szybka instalacja, profesjonalna obsługa i niższe rachunki już po pierwszym sezonie" </p>
+        </div>
+        <div class="testimonial">
+          <div style="display:flex;gap:0.6rem;align-items:center"><div class="avatar">PM</div><div><strong>Piotr M.</strong><div style="font-size:12px;color:var(--muted)">Prezes sp. z o.o.</div></div></div>
+          <p>"Współpraca przy farmie wiatrowej — terminowo, atrakcyjne finansowanie i pełne wsparcie projektowe."</p>
+        </div>
+        <div class="testimonial">
+          <div style="display:flex;gap:0.6rem;align-items:center"><div class="avatar">JG</div><div><strong>Jacek G.</strong><div style="font-size:12px;color:var(--muted)">Rolnik</div></div></div>
+          <p>"Dzięki magazynowi energii mamy spokój przy awariach sieci. Profesjonalny serwis."</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact form & map -->
+  <section id="contact" aria-labelledby="contact-title" style="margin-top:1.5rem">
+    <h2 id="contact-title" class="section-title">Kontakt & Wyceń instalację</h2>
+
+    <div class="two-grid" style="align-items:start;gap:1rem">
+      <form class="card form" id="contactForm" aria-label="Formularz kontaktowy">
+        <h3 style="margin-top:0">Skontaktuj się z nami</h3>
+        <p style="color:var(--muted);margin-bottom:0.8rem">Odpowiadamy w ciągu 24 godzin roboczych. Podaj telefon lub email oraz krótki opis potrzeb.</p>
+
+        <div class="grid-2">
+          <div>
+            <label for="name">Imię i nazwisko</label>
+            <input id="name" type="text" required placeholder="Jan Kowalski">
+          </div>
+          <div>
+            <label for="phone">Telefon</label>
+            <input id="phone" type="text" placeholder="+48 600 000 000">
+          </div>
+        </div>
+
+        <label for="email">Email</label>
+        <input id="email" type="email" required placeholder="kontakt@przyklad.pl">
+
+        <label for="message">Opis projektu</label>
+        <textarea id="message" rows="5" placeholder="Krótki opis: dach, orientacja, zużycie energii..."></textarea>
+
+        <div style="display:flex;gap:0.6rem;align-items:center;margin-top:0.4rem">
+          <button type="submit" class="btn-primary">Wyślij zapytanie</button>
+          <button type="button" class="btn-ghost" onclick="downloadPDF()">Pobierz ofertę PDF</button>
+        </div>
+      </form>
+
+      <div>
+        <div class="card" style="padding:0;">
+          <div id="map" role="application" aria-label="Mapa lokalizacji"></div>
+          <div style="padding:1rem">
+            <strong>Adres:</strong><div style="color:var(--muted)">Warszawa — biuro główne. Obsługujemy całą Polskę i UE.</div>
+          </div>
+        </div>
+
+        <div style="margin-top:0.8rem" class="card" aria-hidden="false">
+          <div style="padding:1rem">
+            <strong>Godziny pracy</strong>
+            <div style="color:var(--muted);margin-top:0.5rem">Pon - Pt: 8:00–18:00<br>Sob: 9:00–14:00</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer>
+  <div class="container foot-grid">
+    <div>
+      <strong>EcoTech Energy Sp. z o.o.</strong>
+      <small style="display:block;color:#bff7ef;margin-top:0.6rem">KRS 0000123456 | NIP: 123-456-78-90 | REGON: 987654321</small>
+      <small>© <span id="year"></span> EcoTech Energy. Wszelkie prawa zastrzeżone.</small>
+    </div>
+
+    <div>
+      <strong>Kontakt</strong>
+      <div style="margin-top:0.5rem;color:#bff7ef">tel: +48 600 000 000<br>email: biuro@ecotech.pl</div>
+      <div style="margin-top:0.8rem"><button class="btn-ghost" onclick="document.getElementById('top').scrollIntoView({behavior:'smooth'})">Do góry ↑</button></div>
+    </div>
+  </div>
+</footer>
+
+<!-- SCRIPT: interaction, animations, tiny carousel, map init -->
+<script>
+  // small helpers
+  const q=(sel,ctx=document)=>ctx.querySelector(sel);
+  const qa=(sel,ctx=document)=>Array.from(ctx.querySelectorAll(sel));
+
+  // year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // nav active on scroll (scrollspy)
+  const navLinks = qa('.nav-link');
+  const sections = navLinks.map(a => document.querySelector(a.getAttribute('href')));
+  function onScroll(){
+    const y = window.scrollY + 120;
+    for(let i=0;i<sections.length;i++){
+      const s = sections[i];
+      if(!s) continue;
+      const top = s.offsetTop, bottom = top + s.offsetHeight;
+      navLinks[i].classList.toggle('active', y>=top && y<bottom);
+    }
+  }
+  window.addEventListener('scroll', onScroll);
+  onScroll();
+
+  // hamburger mobile
+  const hamburger = q('#hamburger');
+  hamburger.addEventListener('click',()=>{
+    const menu = document.createElement('div');
+    menu.style.position='fixed';menu.style.right='18px';menu.style.top='72px';menu.style.background='white';
+    menu.style.borderRadius='10px';menu.style.boxShadow='0 20px 50px rgba(5,40,36,0.15)';menu.style.padding='10px';
+    menu.innerHTML = '<nav style="display:flex;flex-direction:column;gap:6px"><a href="#top" onclick="menuClose(event)">Start</a><a href="#products" onclick="menuClose(event)">Produkty</a><a href="#case-studies" onclick="menuClose(event)">Case Studies</a><a href="#blog" onclick="menuClose(event)">Blog</a><a href="#contact" onclick="menuClose(event)">Kontakt</a></nav>';
+    menu.id='mobileMenu';
+    document.body.appendChild(menu);
+    function menuClose(e){ e.preventDefault(); const href = e.target.getAttribute('href'); document.querySelector(href).scrollIntoView({behavior:'smooth'}); menu.remove(); }
+    menu.addEventListener('mouseleave', ()=>menu.remove());
+  });
+
+  // counters animation (vanilla)
+  function animateCounters(){
+    qa('.counter').forEach(el=>{
+      const target = +el.dataset.target;
+      let cur = 0;
+      const step = Math.max(1, Math.floor(target/120));
+      const t = setInterval(()=>{
+        cur += step;
+        if(cur >= target){ el.textContent = target.toLocaleString('pl-PL'); clearInterval(t); }
+        else el.textContent = cur.toLocaleString('pl-PL');
+      },12);
+    });
+  }
+  // run when visible
+  let countersRun=false;
+  window.addEventListener('scroll',()=>{
+    const stats = q('.stats');
+    if(!countersRun && stats){
+      const rect = stats.getBoundingClientRect();
+      if(rect.top < window.innerHeight - 80){ animateCounters(); countersRun=true; }
+    }
+  });
+
+  // simple carousel auto-scroll
+  const carousel = q('#carousel');
+  if(carousel){
+    let pos = 0;
+    setInterval(()=>{
+      pos = (pos + 1) % carousel.children.length;
+      carousel.style.transform = 'translateX(' + (-pos * (carousel.children[0].offsetWidth + 16)) + 'px)';
+    },3800);
+    window.addEventListener('resize', ()=>carousel.style.transform='translateX(0)');
+  }
+
+  // FAQ accordion
+  qa('.faq-item').forEach(item=>{
+    item.addEventListener('click', ()=>{
+      const p = item.querySelector('p');
+      const open = p.style.display === 'block';
+      qa('.faq-item p').forEach(x=>x.style.display='none');
+      if(!open) p.style.display='block';
+    });
+  });
+
+  // Contact form behaviour
+  const form = q('#contactForm');
+  form.addEventListener('submit', e=>{
+    e.preventDefault();
+    // basic client validation
+    const name = q('#name').value.trim();
+    const email = q('#email').value.trim();
+    if(!name || !email){ alert('Proszę podać imię i email.'); return; }
+    // microinteraction
+    const submit = form.querySelector('.btn-primary');
+    submit.disabled = true;
+    submit.textContent = 'Wysyłanie...';
+    setTimeout(()=>{
+      alert('Dziękujemy — otrzymaliśmy Twoje zapytanie. Odezwiemy się w ciągu 24 godzin roboczych.');
+      form.reset();
+      submit.disabled = false;
+      submit.textContent = 'Wyślij zapytanie';
+    },1200);
+  });
+
+  // Dark mode toggle (client only)
+  const darkToggle = q('#darkToggle');
+  darkToggle.addEventListener('click', ()=>{
+    document.documentElement.classList.toggle('dark-mode');
+    if(document.documentElement.classList.contains('dark-mode')){
+      darkToggle.textContent = '☀️';
+      document.documentElement.style.setProperty('--bg','#001f1d');
+      document.documentElement.style.setProperty('--card','#062726');
+      document.documentElement.style.setProperty('--muted','#9cd7cf');
+      document.documentElement.style.setProperty('--accent','#61f7d9');
+    }else{
+      darkToggle.textContent = '🌙';
+      document.documentElement.style.removeProperty('--bg');
+      document.documentElement.style.removeProperty('--card');
+      document.documentElement.style.removeProperty('--muted');
+      document.documentElement.style.removeProperty('--accent');
+    }
+  });
+
+  // tiny helpers invoked by buttons
+  function scrollToContact(){ document.getElementById('contact').scrollIntoView({behavior:'smooth'}); }
+  function openPricing(){ alert('Sekcja z cennikiem w przygotowaniu — skontaktuj się po wycenę.'); }
+  function openWindCalc(){ alert('Analiza wiatru — skontaktuj się, przeprowadzimy pomiary anemometryczne.'); }
+  function openStorage(){ alert('Magazyny energii — skontaktuj się w sprawie rozwiązań BESS.'); }
+  function subscribe(){
+    const e = q('#nl-email').value.trim();
+    if(!e){ alert('Podaj email.'); return; }
+    alert('Dziękujemy za zapis! Potwierdź subskrypcję w otrzymanej wiadomości.');
+    q('#nl-email').value='';
+  }
+  function downloadPDF(){ alert('Pobierz ofertę — funkcja demo. W wersji produkcyjnej generujemy PDF z pełną kalkulacją.'); }
+
+  // Small GSAP reveal animation if available
+  window.addEventListener('load', ()=>{
+    if(window.gsap){
+      gsap.from('.hero h2',{y:30,opacity:0,duration:0.9,ease:'power3.out'});
+      gsap.from('.hero p',{y:20,opacity:0,duration:0.9,delay:0.12});
+      gsap.from('.card',{y:20,opacity:0,duration:0.9,stagger:0.09,delay:0.18});
+    }
+    // trigger counters if hero visible
+    const stats = q('.stats');
+    if(stats && stats.getBoundingClientRect().top < window.innerHeight){ animateCounters(); countersRun=true; }
+  });
+
+  // Initialize Google Map (replace YOUR_API_KEY in script src below)
+  function initMap(){
+    const coords = { lat: 52.2297, lng: 21.0122 };
+    if(!window.google || !google.maps){ console.warn('Mapa wymaga Google Maps API'); return; }
+    const map = new google.maps.Map(document.getElementById('map'),{
+      center: coords, zoom:12, disableDefaultUI:false,
+      styles:[
+        { elementType:'geometry', stylers:[{color:'#eaeaea'}] },
+        { elementType:'labels.text.fill', stylers:[{color:'#0b3d35'}] },
+        { featureType:'water', elementType:'geometry', stylers:[{color:'#cfeff4'}] }
+      ]
+    });
+    const marker = new google.maps.Marker({position:coords,map, title:'EcoTech Energy'});
+    const infow = new google.maps.InfoWindow({content:'<strong>EcoTech Energy</strong><br>Warszawa — biuro główne'});
+    marker.addListener('click', ()=>infow.open(map,marker));
+  }
+
+  window.scrollToContact = scrollToContact;
+  window.openPricing = openPricing;
+  window.openWindCalc = openWindCalc;
+  window.openStorage = openStorage;
+  window.subscribe = subscribe;
+  window.downloadPDF = downloadPDF;
+  window.initMap = initMap;
+</script>
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script>
+</body>
+</html>
