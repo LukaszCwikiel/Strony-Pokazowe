@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jak opublikować stronę z GitHub na home.pl</title>
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #f0f4ff, #e0f7fa);
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #0073e6;
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+header h1 {
+    font-size: 2rem;
+}
+
+.container {
+    max-width: 900px;
+    margin: -40px auto 40px auto;
+    padding: 40px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.container:hover {
+    transform: translateY(-5px);
+}
+
+h2 {
+    color: #0073e6;
+    margin-bottom: 20px;
+}
+
+ol, ul {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+li {
+    margin-bottom: 15px;
+    padding-left: 10px;
+    position: relative;
+}
+
+li::before {
+    content: '•';
+    color: #0073e6;
+    position: absolute;
+    left: -10px;
+    font-weight: bold;
+}
+
+code {
+    background-color: #f0f0f0;
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-family: monospace;
+    font-size: 0.95em;
+}
+
+a {
+    color: #0073e6;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+footer {
+    text-align: center;
+    margin: 30px 0;
+    color: #555;
+    font-size: 0.9em;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Jak opublikować stronę z GitHub na home.pl</h1>
+    </header>
+
+    <div class="container">
+        <h2>Krok po kroku:</h2>
+        <ol>
+            <li><strong>Załóż konto na home.pl</strong> – jeśli jeszcze go nie masz, zarejestruj się na <a href="https://home.pl" target="_blank">home.pl</a>.</li>
+            <li><strong>Zaloguj się do panelu klienta</strong> i wybierz swoją usługę hostingu.</li>
+            <li><strong>Wejdź do Menedżera Plików</strong> w panelu home.pl – tutaj będziesz przesyłać pliki swojej strony.</li>
+            <li><strong>Pobierz swój kod z GitHub</strong>:
+                <ul>
+                    <li>Przejdź do repozytorium na GitHub.</li>
+                    <li>Kliknij zielony przycisk <code>Code</code> → <code>Download ZIP</code>.</li>
+                    <li>Rozpakuj pobrany plik ZIP na swoim komputerze.</li>
+                </ul>
+            </li>
+            <li><strong>Prześlij pliki na home.pl</strong>:
+                <ul>
+                    <li>W Menedżerze Plików wybierz katalog główny swojej domeny (zwykle <code>public_html</code>).</li>
+                    <li>Prześlij wszystkie pliki i foldery ze swojego repozytorium.</li>
+                </ul>
+            </li>
+            <li><strong>Sprawdź poprawność</strong> – po przesłaniu plików wejdź na swoją domenę w przeglądarce i upewnij się, że strona działa poprawnie.</li>
+            <li><strong>Opcjonalnie: ustaw domenę</strong> – jeśli masz niestandardową domenę, upewnij się, że wskazuje na katalog <code>public_html</code> lub skonfiguruj DNS zgodnie z instrukcjami home.pl.</li>
+        </ol>
+
+        <h2>Wskazówki:</h2>
+        <ul>
+            <li>Upewnij się, że plik główny strony nazywa się <code>index.html</code>.</li>
+            <li>Możesz korzystać z podfolderów, ale pamiętaj, aby poprawnie ustawiać ścieżki do plików CSS i JS.</li>
+            <li>Jeśli Twoja strona używa backendu (PHP, Node.js), home.pl obsługuje tylko PHP i niektóre technologie serwerowe.</li>
+        </ul>
+    </div>
+
+    <footer>
+        &copy; 2025 Twoja strona edukacyjna
+    </footer>
+</body>
+</html>
